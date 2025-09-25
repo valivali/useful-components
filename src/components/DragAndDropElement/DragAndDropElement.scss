@@ -1,0 +1,175 @@
+.drag-and-drop-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+
+  .draggable-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .draggable-item {
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.2s ease;
+    color: white;
+    font-weight: 500;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    &.dragging {
+      opacity: 0.5;
+      transform: scale(0.95);
+      cursor: grabbing;
+    }
+  }
+
+  .drop-zones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .drop-zone {
+    min-height: 150px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+
+    &.hovered {
+      border-color: #000;
+      border-width: 3px;
+      background: rgba(0, 0, 0, 0.05);
+      transform: scale(1.02);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+      .drop-zone-label {
+        color: #000;
+        font-weight: 600;
+      }
+    }
+
+    &.invalid {
+      border-color: #ff4757;
+      background: rgba(255, 71, 87, 0.1);
+
+      .drop-zone-label {
+        color: #ff4757;
+      }
+    }
+
+    .drop-zone-label {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+// Dark theme specific adjustments
+@media (prefers-color-scheme: dark) {
+  .drag-and-drop-container {
+    .draggable-items {
+      background: rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .drop-zone {
+      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(0, 0, 0, 0.1);
+
+      &.hovered {
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+
+        .drop-zone-label {
+          color: #fff;
+        }
+      }
+
+      .drop-zone-label {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+}
+
+// Light theme specific adjustments
+@media (prefers-color-scheme: light) {
+  .drag-and-drop-container {
+    .draggable-items {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .drop-zone {
+      border-color: rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.5);
+
+      .drop-zone-label {
+        color: rgba(0, 0, 0, 0.7);
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .drag-and-drop-container {
+    gap: 1rem;
+
+    .draggable-items {
+      padding: 0.5rem;
+      gap: 0.5rem;
+    }
+
+    .draggable-item {
+      padding: 0.8rem;
+      min-width: 100px;
+      font-size: 0.9rem;
+    }
+
+    .drop-zones {
+      grid-template-columns: 1fr;
+      padding: 0.5rem;
+      gap: 0.5rem;
+    }
+
+    .drop-zone {
+      min-height: 120px;
+
+      .drop-zone-label {
+        font-size: 1rem;
+      }
+    }
+  }
+}

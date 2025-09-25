@@ -1,6 +1,6 @@
-# React + TypeScript + Vite Boilerplate
+# Useful Components Library
 
-A production-ready boilerplate for React applications with TypeScript, featuring essential development tools and best practices.
+A collection of reusable React components with beautiful animations and interactions, built with TypeScript and modern development practices.
 
 ## ✨ Features
 
@@ -26,6 +26,9 @@ A production-ready boilerplate for React applications with TypeScript, featuring
 - 📁 **Absolute Imports** - Clean import paths with `@/` aliases
 - 🔧 **Environment Variables** - Configurable app settings with example template
 - 📋 **TypeScript Project References** - Optimized build performance
+- 🎨 **Component Library** - Production-ready components with comprehensive examples
+- 🚀 **Performance Optimized** - React best practices with memoization and static data
+- ♿ **Accessibility First** - WCAG compliant components with proper ARIA support
 
 ## 🚀 Getting Started
 
@@ -139,7 +142,7 @@ The boilerplate includes a production-ready error boundary component that:
 
 ### Writing Tests
 
-```typescript
+```tsx
 import { render, screen } from "@testing-library/react"
 import { BrowserRouter } from "react-router-dom"
 import MyComponent from "./MyComponent"
@@ -170,15 +173,124 @@ The build artifacts will be stored in the `dist/` directory, optimized for produ
 ```
 src/
 ├── components/
-│   ├── general/        # Reusable UI components (ErrorBoundary)
-│   └── layout/         # Layout-specific components
-├── contexts/           # React context providers
-├── hooks/              # Custom React hooks
-├── pages/              # Page-level components
-├── App.tsx             # Main app component with routing
-├── main.tsx            # Application entry point
-└── setupTests.ts       # Jest test configuration
+│   ├── general/           # General utility components (ErrorBoundary)
+│   ├── FlipElement/       # FlipElement component with animations
+│   │   ├── FlipElement.tsx
+│   │   ├── FlipElement.scss
+│   │   ├── FlipElement.test.tsx
+│   │   └── index.ts
+│   └── DragAndDropElement/ # Advanced drag and drop component
+│       ├── DragAndDropElement.tsx
+│       ├── DragAndDropElement.scss
+│       ├── DragAndDropElement.test.tsx
+│       └── index.ts
+├── hooks/                 # Custom React hooks
+│   └── useDragAndDrop.ts  # Drag and drop functionality hook
+├── pages/                 # Page-level components for routing
+│   ├── home/             # Homepage with component grid
+│   ├── flip-element/     # FlipElement examples and documentation
+│   └── drag-and-drop/    # DragAndDrop examples and documentation
+├── App.tsx               # Main app component with routing
+├── main.tsx              # Application entry point
+└── setupTests.ts         # Jest test configuration
 ```
+
+## 🧩 Available Components
+
+### FlipElement
+
+A versatile component for creating smooth flip animations with various trigger actions.
+
+**Features:**
+
+- Multiple trigger actions: click, hover, or programmatic
+- Flip directions: horizontal or vertical
+- Customizable animation duration
+- Controlled and uncontrolled modes
+- Accessibility support with reduced motion preferences
+
+**Example:**
+
+```tsx
+<FlipElement action="click" flipDirection="horizontal" flipDuration={600} flipTo={<div>Back side content</div>}>
+  <div>Front side content</div>
+</FlipElement>
+```
+
+### DragAndDropElement
+
+An advanced HTML5 drag-and-drop component with comprehensive features and performance optimizations.
+
+**Features:**
+
+- ✨ HTML5 drag and drop with visual feedback
+- 🔒 Type-based restrictions for drop zones
+- 🎨 Fully customizable styling with CSS classes
+- 📱 Responsive design with mobile support
+- ⚡ Smooth animations and transitions
+- 🎮 Event callbacks for custom logic (onDrop, onDragStart, onDragEnd)
+- ♿ Accessible drag and drop interactions
+- 🚀 Performance optimized with `React.memo` and memoized callbacks
+- 🎯 Multiple demo scenarios (Kanban board, shopping cart, type restrictions)
+
+**Example:**
+
+```tsx
+const items = [
+  { id: "item-1", content: "Task A", type: "task" },
+  { id: "item-2", content: "Task B", type: "task" }
+]
+
+const dropZones = [
+  { id: "todo", label: "To Do" },
+  { id: "done", label: "Done", accepts: ["task"] }
+]
+
+const MyDragDropExample = () => {
+  return (
+    <DragAndDropElement
+      items={items}
+      dropZones={dropZones}
+      onDrop={(itemId, dropZoneId) => console.log(`Dropped ${itemId} into ${dropZoneId}`)}
+      className="my-drag-drop"
+      itemClassName="draggable-item"
+      dropZoneClassName="drop-zone"
+    />
+  )
+}
+```
+
+**Props:**
+
+- `items`: Array of draggable items with id, content, and optional type
+- `dropZones`: Array of drop zones with id, label, and optionally accepts an array
+- `onDrop`: Callback when item is dropped: (itemId, dropZoneId) => void
+- `onDragStart`: Callback when dragging starts: (itemId) => void
+- `onDragEnd`: Callback when dragging ends: (itemId) => void
+- `className`: Additional CSS class for the container
+- `itemClassName`: Additional CSS class for draggable items
+- `dropZoneClassName`: Additional CSS class for drop zones
+
+## 🆕 Recent Improvements
+
+### Performance Optimizations (Latest Update)
+
+The component library has been enhanced with comprehensive performance optimizations:
+
+- **Static Data Extraction**: All demo data moved outside components to prevent recreation on every render
+- **React.memo Integration**: KanbanBoard and other components wrapped with `React.memo` to prevent unnecessary re-renders
+- **Memoized Callbacks**: All event handlers optimized with useCallback to maintain referential equality
+- **Computed Values**: Shopping cart filtering and column data pre-computed with useMemo
+- **Reduced Bundle Size**: Eliminated redundant object/function creation and inline JSX optimizations
+
+**Impact**: Significantly improved rendering performance, especially during drag-and-drop operations and with larger datasets.
+
+### UI/UX Enhancements
+
+- **Improved Color Contrast**: Enhanced readability across all demo sections with better background opacity and text shadows
+- **Better Visual Hierarchy**: Strengthened borders, improved section backgrounds, and optimized text visibility
+- **Dark Mode Support**: Enhanced dark theme styles for better accessibility
+- **Responsive Design**: Improved mobile experience with better touch interactions
 
 ## 🔄 Development Workflow
 

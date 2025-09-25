@@ -9,6 +9,7 @@ declare global {
       toBeInTheDocument(): R
       toHaveAttribute(attr: string, value?: string): R
       toHaveClass(...classes: string[]): R
+      toHaveTextContent(text: string | RegExp): R
     }
   }
 }
