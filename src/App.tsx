@@ -4,7 +4,8 @@ import { Route, Routes } from "react-router-dom"
 
 import ErrorBoundary from "@/components/general/ErrorBoundary"
 import DragAndDropPage from "@/pages/drag-and-drop/DragAndDrop"
-import FlipElementPage from "@/pages/flip-element/FlipElement"
+import ExpandablePage from "@/pages/expandable/Expandable"
+import FlipPage from "@/pages/flip/Flip"
 import HomePage from "@/pages/home/Home"
 
 function App() {
@@ -13,8 +14,9 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/flip-element" element={<FlipElementPage />} />
+          <Route path="/flip" element={<FlipPage />} />
           <Route path="/drag-and-drop" element={<DragAndDropPage />} />
+          <Route path="/expandable" element={<ExpandablePage />} />
         </Routes>
       </div>
     </ErrorBoundary>

@@ -1,0 +1,519 @@
+@use "../../mixins" as *;
+
+// Typography system with responsive design
+.ui-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  line-height: 1.5;
+  margin: 0;
+  color: #333;
+
+  // Heading variants
+  &--h1 {
+    font-size: 2rem; // Mobile-first smaller size
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+
+    @include mobile-first($breakpoint-sm) {
+      font-size: 2.4rem;
+    }
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 2.8rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 3rem;
+    }
+
+    &.ui-text--gradient {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  &--h2 {
+    font-size: 1.5rem; // Mobile-first smaller size
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1.75rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 2rem;
+    }
+  }
+
+  &--h3 {
+    font-size: 1.25rem; // Mobile-first smaller size
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1.375rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &--h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1.25rem;
+    }
+  }
+
+  &--h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1.125rem;
+    }
+  }
+
+  &--h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1rem;
+    }
+  }
+
+  // Body text variants
+  &--body {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1.05rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 1.1rem;
+    }
+  }
+
+  &--body-small {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 0.9rem;
+    }
+  }
+
+  &--caption {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    color: #666;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 0.8rem;
+    }
+  }
+
+  &--lead {
+    font-size: 1.125rem; // Mobile-first
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1.25rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 1.375rem;
+    }
+  }
+
+  // Color variants
+  &--primary {
+    color: #667eea;
+  }
+
+  &--secondary {
+    color: #666;
+  }
+
+  &--success {
+    color: #27ae60;
+  }
+
+  &--warning {
+    color: #f39c12;
+  }
+
+  &--danger {
+    color: #e74c3c;
+  }
+
+  &--muted {
+    color: #999;
+  }
+
+  &--light {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  &--white {
+    color: white;
+  }
+
+  &--dark {
+    color: #2c3e50;
+  }
+
+  // Text styles
+  &--bold {
+    font-weight: 700;
+  }
+
+  &--semibold {
+    font-weight: 600;
+  }
+
+  &--medium {
+    font-weight: 500;
+  }
+
+  &--light-weight {
+    font-weight: 300;
+  }
+
+  &--italic {
+    font-style: italic;
+  }
+
+  &--uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &--lowercase {
+    text-transform: lowercase;
+  }
+
+  &--capitalize {
+    text-transform: capitalize;
+  }
+
+  // Text alignment
+  &--center {
+    text-align: center;
+  }
+
+  &--left {
+    text-align: left;
+  }
+
+  &--right {
+    text-align: right;
+  }
+
+  &--justify {
+    text-align: justify;
+  }
+
+  // Text effects
+  &--shadow {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  &--shadow-light {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  &--shadow-heavy {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  &--gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    &.ui-text--gradient-2 {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    &.ui-text--gradient-3 {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    &.ui-text--gradient-4 {
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  // Truncation
+  &--truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &--truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &--truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  // Responsive visibility
+  &--mobile-only {
+    @include mobile-first($breakpoint-md) {
+      display: none;
+    }
+  }
+
+  &--desktop-only {
+    @include mobile-only {
+      display: none;
+    }
+  }
+
+  // Link styles
+  &--link {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #5a67d8;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: 2px solid rgba(102, 126, 234, 0.5);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+
+    &.ui-text--link-underline {
+      text-decoration: underline;
+    }
+
+    &.ui-text--link-no-underline {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
+  // Code text
+  &--code {
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", "JetBrains Mono", "Fira Code", monospace;
+    background: #f1f3f4;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875em;
+    font-weight: 500;
+    color: #d73a49;
+  }
+
+  // Responsive spacing
+  &--no-margin {
+    margin: 0;
+  }
+
+  &--margin-bottom-small {
+    margin-bottom: 0.5rem;
+  }
+
+  &--margin-bottom {
+    margin-bottom: 1rem;
+  }
+
+  &--margin-bottom-large {
+    margin-bottom: 1.5rem;
+  }
+
+  // Max width constraints for readability
+  &--max-width-sm {
+    max-width: 100%;
+
+    @include mobile-first($breakpoint-md) {
+      max-width: 500px;
+    }
+  }
+
+  &--max-width-md {
+    max-width: 100%;
+
+    @include mobile-first($breakpoint-md) {
+      max-width: 600px;
+    }
+  }
+
+  &--max-width-lg {
+    max-width: 100%;
+
+    @include mobile-first($breakpoint-md) {
+      max-width: 700px;
+    }
+  }
+
+  // Responsive padding for mobile
+  &--mobile-padding {
+    padding: 0 0.5rem;
+
+    @include mobile-first($breakpoint-md) {
+      padding: 0;
+    }
+  }
+}
+
+// List styles
+.ui-list {
+  margin: 0;
+  padding: 0;
+
+  &--unstyled {
+    list-style: none;
+  }
+
+  &--inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    list-style: none;
+
+    li {
+      margin: 0;
+    }
+  }
+
+  &--spaced {
+    li {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &--features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+
+    @include mobile-first($breakpoint-md) {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    li {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.75rem;
+      border-radius: 6px;
+      border-left: 3px solid #a8e6cf;
+      margin: 0;
+    }
+  }
+}
+
+// Blockquote
+.ui-blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #667eea;
+  background: #f8f9fa;
+  font-style: italic;
+  position: relative;
+
+  &::before {
+    content: '"';
+    font-size: 3rem;
+    color: #667eea;
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    opacity: 0.3;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #666;
+    font-style: normal;
+
+    &::before {
+      content: "— ";
+    }
+  }
+}
+
+// Mobile-only optimizations for very small screens
+@include mobile-only {
+  .ui-text {
+    &--h1 {
+      font-size: 1.75rem;
+    }
+
+    &--h2 {
+      font-size: 1.3rem;
+    }
+
+    &--h3 {
+      font-size: 1.1rem;
+    }
+
+    &--body,
+    &--lead {
+      font-size: 0.9rem;
+    }
+
+    &--mobile-padding {
+      padding: 0 0.25rem;
+    }
+  }
+}

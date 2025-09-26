@@ -1,28 +1,26 @@
-import "./FlipElement.scss"
+import "./Flip.scss"
 
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
 
 import FlipElement from "@/components/FlipElement"
+import { Button, Container, DemoContainer, H2, H3, PageFooter, PageHeader, PropsTable } from "@/styles/ui"
 
-const FlipElementPage: React.FC = () => {
+const FlipPage: React.FC = () => {
   const [controlledFlip, setControlledFlip] = useState(false)
 
   return (
-    <div className="flip-element-page">
-      <header className="flip-element-page__header">
-        <Link to="/" className="flip-element-page__back-link">
-          ← Back to Components
-        </Link>
-        <h1>FlipElement Component</h1>
-        <p>A versatile component for creating smooth flip animations with various trigger actions.</p>
-      </header>
+    <Container className="flip-element-page">
+      <PageHeader
+        title="FlipElement Component"
+        subtitle="A versatile component for creating smooth flip animations with various trigger actions."
+        backLink={{ to: "/", text: "← Back to Components" }}
+      />
 
       <main className="flip-element-page__content">
-        <section className="demo-section">
-          <h2>Click to Flip (Horizontal)</h2>
+        <div className="demo-section">
+          <H2>Click to Flip (Horizontal)</H2>
           <p>Click on the card to see it flip horizontally.</p>
-          <div className="demo-container">
+          <DemoContainer>
             <FlipElement
               action="click"
               flipDirection="horizontal"
@@ -39,13 +37,13 @@ const FlipElementPage: React.FC = () => {
                 <p>Playing Card</p>
               </div>
             </FlipElement>
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
 
-        <section className="demo-section">
-          <h2>Hover to Flip (Vertical)</h2>
+        <div className="demo-section">
+          <H2>Hover to Flip (Vertical)</H2>
           <p>Hover over the element to see it flip vertically.</p>
-          <div className="demo-container">
+          <DemoContainer>
             <FlipElement
               action="hover"
               flipDirection="vertical"
@@ -62,17 +60,17 @@ const FlipElementPage: React.FC = () => {
                 <p>Hover for details</p>
               </div>
             </FlipElement>
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
 
-        <section className="demo-section">
-          <h2>Controlled Flip</h2>
+        <div className="demo-section">
+          <H2>Controlled Flip</H2>
           <p>Control the flip state programmatically with a button.</p>
-          <div className="demo-container">
+          <DemoContainer>
             <div className="controlled-demo">
-              <button className="control-button" onClick={() => setControlledFlip(!controlledFlip)}>
+              <Button className="control-button" onClick={() => setControlledFlip(!controlledFlip)}>
                 {controlledFlip ? "Show Front" : "Show Back"}
-              </button>
+              </Button>
               <FlipElement
                 action="function"
                 flipDirection="horizontal"
@@ -92,13 +90,13 @@ const FlipElementPage: React.FC = () => {
                 </div>
               </FlipElement>
             </div>
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
 
-        <section className="demo-section">
-          <h2>Fast Flip Animation</h2>
+        <div className="demo-section">
+          <H2>Fast Flip Animation</H2>
           <p>A quick flip animation with custom duration.</p>
-          <div className="demo-container">
+          <DemoContainer>
             <FlipElement
               action="click"
               flipDirection="horizontal"
@@ -115,13 +113,13 @@ const FlipElementPage: React.FC = () => {
                 <p>Quick Flip</p>
               </div>
             </FlipElement>
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
 
-        <section className="demo-section">
-          <h2>Different Sizes</h2>
+        <div className="demo-section">
+          <H2>Different Sizes</H2>
           <p>FlipElement adapts to different container sizes.</p>
-          <div className="demo-container demo-container--sizes">
+          <DemoContainer className="demo-container--sizes">
             <FlipElement action="click" className="demo-card demo-card--small" flipTo={<div className="card-back">Small</div>}>
               <div className="card-front">📱</div>
             </FlipElement>
@@ -133,45 +131,26 @@ const FlipElementPage: React.FC = () => {
             <FlipElement action="click" className="demo-card demo-card--large" flipTo={<div className="card-back">Large</div>}>
               <div className="card-front">🖥️</div>
             </FlipElement>
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
       </main>
 
-      <footer className="flip-element-page__footer">
-        <h3>Props</h3>
-        <div className="props-table">
-          <div className="prop-row">
-            <code>children</code>
-            <span>Content for the front side</span>
-          </div>
-          <div className="prop-row">
-            <code>flipTo</code>
-            <span>Content for the back side</span>
-          </div>
-          <div className="prop-row">
-            <code>action</code>
-            <span>'click' | 'hover' | 'function' (default: 'click')</span>
-          </div>
-          <div className="prop-row">
-            <code>flipDirection</code>
-            <span>'horizontal' | 'vertical' (default: 'horizontal')</span>
-          </div>
-          <div className="prop-row">
-            <code>flipDuration</code>
-            <span>Animation duration in ms (default: 600)</span>
-          </div>
-          <div className="prop-row">
-            <code>isFlipped</code>
-            <span>Controlled flip state (for action: 'function')</span>
-          </div>
-          <div className="prop-row">
-            <code>onFlipChange</code>
-            <span>Callback when flip state changes</span>
-          </div>
-        </div>
-      </footer>
-    </div>
+      <PageFooter className="flip-element-page__footer">
+        <H3>Props</H3>
+        <PropsTable
+          props={[
+            { name: "children", description: "Content for the front side" },
+            { name: "flipTo", description: "Content for the back side" },
+            { name: "action", description: "'click' | 'hover' | 'function'", default: "click" },
+            { name: "flipDirection", description: "'horizontal' | 'vertical'", default: "horizontal" },
+            { name: "flipDuration", description: "Animation duration in ms", default: "600" },
+            { name: "isFlipped", description: "Controlled flip state (for action: 'function')" },
+            { name: "onFlipChange", description: "Callback when flip state changes" }
+          ]}
+        />
+      </PageFooter>
+    </Container>
   )
 }
 
-export default FlipElementPage
+export default FlipPage

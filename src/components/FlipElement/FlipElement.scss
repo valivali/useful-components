@@ -1,9 +1,20 @@
+@use "../../styles/mixins" as *;
+
 .flip-element {
   perspective: 1000px;
-  display: inline-block;
+  display: block; // Full width on mobile
+  width: 100%; // Full width on mobile
+  max-width: 300px; // Reasonable max width for mobile
+  margin: 0 auto; // Center on mobile
 
   &--clickable {
     cursor: pointer;
+  }
+
+  @include mobile-first($breakpoint-md) {
+    display: inline-block;
+    max-width: none;
+    margin: 0;
   }
 
   &__inner {
@@ -11,18 +22,32 @@
     width: 100%;
     height: 100%;
     text-align: center;
-    transition: transform var(--flip-duration, 600ms) ease-in-out;
+    transition: transform var(--flip-duration, 400ms) ease-in-out; // Faster on mobile
     transform-style: preserve-3d;
+    min-height: 120px; // Minimum height for mobile
+
+    @include mobile-first($breakpoint-md) {
+      transition: transform var(--flip-duration, 600ms) ease-in-out;
+      min-height: auto;
+    }
   }
 
   &__front,
   &__back {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
     border-radius: inherit;
     overflow: hidden;
+    // padding: 0.75rem; // Add padding for mobile
+    box-sizing: border-box;
+
+    // @include mobile-first($breakpoint-md) {
+    //   padding: 1rem;
+    // }
   }
 
   &__front {
@@ -59,26 +84,47 @@
     }
   }
 
-  // Smooth hover effects
+  // Smooth hover effects (reduced for mobile)
   &:not(.flip-element--flipped):hover {
     .flip-element__inner {
-      transform: scale(1.02);
+      transform: scale(1.01); // Smaller scale on mobile
+
+      @include mobile-first($breakpoint-md) {
+        transform: scale(1.02);
+      }
     }
   }
 
-  // Accessibility
+  // Accessibility (enhanced for mobile)
   &:focus-visible {
     outline: 2px solid #007acc;
     outline-offset: 2px;
   }
 
-  // Ensure proper sizing
+  // Touch-friendly focus for mobile
+  &:focus {
+    outline: 2px solid rgba(0, 122, 204, 0.5);
+    outline-offset: 1px;
+
+    @include mobile-first($breakpoint-md) {
+      outline: none;
+    }
+  }
+
+  // Ensure proper sizing and touch targets
   &__front,
   &__back {
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    min-height: 120px; // Minimum touch target for mobile
+    font-size: 0.9rem; // Smaller text on mobile
+
+    @include mobile-first($breakpoint-md) {
+      min-height: auto;
+      font-size: 1rem;
+    }
   }
 }
 
@@ -91,5 +137,21 @@
 @media (prefers-reduced-motion: reduce) {
   .flip-element__inner {
     transition-duration: 0.1s;
+  }
+}
+
+// Mobile-specific adjustments
+@include mobile-only {
+  .flip-element {
+    &__inner {
+      transition-duration: 300ms; // Even faster on small screens
+    }
+
+    &__front,
+    &__back {
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      min-height: 100px;
+    }
   }
 }

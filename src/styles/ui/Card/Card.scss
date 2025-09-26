@@ -1,0 +1,424 @@
+@use "../../mixins" as *;
+
+// Base card component with responsive design
+.ui-card {
+  background: white;
+  border-radius: 8px; // Mobile-first smaller radius
+  padding: 1.5rem; // Mobile-first smaller padding
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Mobile-first smaller shadow
+  border: 1px solid #e5e5e5;
+  transition: all 0.3s ease;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  @include mobile-first($breakpoint-md) {
+    border-radius: 10px;
+    padding: 1.75rem;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.06);
+  }
+
+  @include mobile-first($breakpoint-lg) {
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  }
+
+  &:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); // Mobile-first smaller shadow
+    border-color: #667eea;
+
+    @include mobile-first($breakpoint-md) {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // Card variations
+  &--elevated {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+  }
+
+  &--outlined {
+    border: 2px solid #e5e5e5;
+    box-shadow: none;
+
+    &:hover {
+      border-color: #667eea;
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+    }
+  }
+
+  &--interactive {
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    &:active {
+      transform: translateY(-2px);
+    }
+  }
+
+  &--glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  &--dark {
+    background: #2c3e50;
+    color: white;
+    border-color: #34495e;
+
+    &:hover {
+      background: #34495e;
+      border-color: #667eea;
+    }
+  }
+
+  // Size variations
+  &--small {
+    padding: 1rem;
+    border-radius: 6px;
+
+    @include mobile-first($breakpoint-md) {
+      padding: 1.25rem;
+      border-radius: 7px;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+  }
+
+  &--large {
+    padding: 2rem;
+    border-radius: 10px;
+
+    @include mobile-first($breakpoint-md) {
+      padding: 2.5rem;
+      border-radius: 12px;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      padding: 3rem;
+      border-radius: 16px;
+    }
+  }
+
+  // Coming soon state
+  &--coming-soon {
+    cursor: default;
+    opacity: 0.6;
+
+    &:hover {
+      transform: none;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      border-color: #e5e5e5;
+    }
+  }
+
+  // Card header
+  &__header {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e5e5;
+
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+
+  // Card content
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  // Card footer
+  &__footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e5e5;
+
+    &:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+  }
+
+  // Card icon
+  &__icon {
+    font-size: 2rem; // Mobile-first smaller size
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem; // Mobile-first smaller size
+    height: 3rem;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border-radius: 50%;
+    margin-bottom: 1rem; // Mobile-first smaller margin
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 2.5rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 3rem;
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    // Icon variations
+    &--gradient-1 {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    &--gradient-2 {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    &--gradient-3 {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    &--gradient-4 {
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    }
+  }
+
+  // Card title
+  &__title {
+    font-size: 1.25rem; // Mobile-first smaller size
+    font-weight: 600;
+    margin: 0 0 0.75rem 0; // Mobile-first smaller margin
+    color: #333;
+    line-height: 1.3;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1.4rem;
+      margin: 0 0 1rem 0;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 1.5rem;
+    }
+
+    .ui-card--dark & {
+      color: white;
+    }
+
+    .ui-card--glass & {
+      color: white;
+    }
+  }
+
+  // Card description
+  &__description {
+    color: #666;
+    line-height: 1.5;
+    margin: 0 0 1rem 0; // Mobile-first smaller margin
+    flex: 1;
+    font-size: 0.9rem; // Mobile-first smaller size
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 0 0 1.25rem 0;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      margin: 0 0 1.5rem 0;
+    }
+
+    .ui-card--dark & {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .ui-card--glass & {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  // Card tags
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem; // Mobile-first smaller gap
+    margin-bottom: 0.75rem; // Mobile-first smaller margin
+
+    @include mobile-first($breakpoint-md) {
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__tag {
+    background: #f0f2f5;
+    color: #555;
+    padding: 0.2rem 0.6rem; // Mobile-first smaller padding
+    border-radius: 10px; // Mobile-first smaller radius
+    font-size: 0.75rem; // Mobile-first smaller size
+    font-weight: 500;
+
+    @include mobile-first($breakpoint-md) {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.8rem;
+    }
+
+    // Tag variations
+    &--primary {
+      background: #667eea;
+      color: white;
+    }
+
+    &--success {
+      background: #27ae60;
+      color: white;
+    }
+
+    &--warning {
+      background: #f39c12;
+      color: white;
+    }
+
+    &--danger {
+      background: #e74c3c;
+      color: white;
+    }
+
+    .ui-card--dark & {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .ui-card--glass & {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+  }
+
+  // Card arrow (for interactive cards)
+  &__arrow {
+    position: absolute;
+    top: 1rem; // Mobile-first smaller positioning
+    right: 1rem;
+    font-size: 1.25rem; // Mobile-first smaller size
+    color: #667eea;
+    transition: transform 0.2s ease;
+
+    @include mobile-first($breakpoint-md) {
+      top: 1.25rem;
+      right: 1.25rem;
+      font-size: 1.4rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      top: 1.5rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .ui-card:hover & {
+      transform: translateX(2px); // Mobile-first smaller transform
+
+      @include mobile-first($breakpoint-md) {
+        transform: translateX(3px);
+      }
+
+      @include mobile-first($breakpoint-lg) {
+        transform: translateX(4px);
+      }
+    }
+
+    .ui-card--coming-soon & {
+      display: none;
+    }
+
+    .ui-card--dark & {
+      color: white;
+    }
+
+    .ui-card--glass & {
+      color: white;
+    }
+  }
+}
+
+// Card link wrapper
+.ui-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  &:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+    border-radius: inherit;
+  }
+}
+
+// Mobile-only optimizations for very small screens
+@include mobile-only {
+  .ui-card {
+    padding: 1.25rem;
+    border-radius: 6px;
+
+    &__icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    &__title {
+      font-size: 1.1rem;
+    }
+
+    &__description {
+      font-size: 0.85rem;
+    }
+
+    &__arrow {
+      top: 0.75rem;
+      right: 0.75rem;
+      font-size: 1.1rem;
+    }
+  }
+}

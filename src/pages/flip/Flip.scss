@@ -1,0 +1,621 @@
+@use "../../styles/mixins" as *;
+
+.flip-element-page {
+  max-width: 100%; // Mobile-first full width
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem; // Mobile-first smaller padding
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  @include mobile-first($breakpoint-md) {
+    padding: 1.5rem;
+  }
+
+  @include mobile-first($breakpoint-lg) {
+    max-width: 1200px;
+    padding: 2rem;
+  }
+
+  &__header {
+    margin-bottom: 2rem; // Mobile-first smaller margin
+    text-align: center;
+
+    h1 {
+      font-size: 2rem; // Mobile-first smaller size
+      margin: 1rem 0;
+      color: #333;
+      line-height: 1.2;
+
+      @include mobile-first($breakpoint-md) {
+        font-size: 2.25rem;
+      }
+
+      @include mobile-first($breakpoint-lg) {
+        font-size: 2.5rem;
+      }
+    }
+
+    p {
+      font-size: 1rem; // Mobile-first smaller size
+      color: #666;
+      max-width: 100%; // Mobile-first full width
+      margin: 0 auto;
+      padding: 0 0.5rem; // Mobile-first padding
+
+      @include mobile-first($breakpoint-md) {
+        font-size: 1.05rem;
+        max-width: 500px;
+        padding: 0;
+      }
+
+      @include mobile-first($breakpoint-lg) {
+        font-size: 1.1rem;
+        max-width: 600px;
+      }
+    }
+
+    @include mobile-first($breakpoint-md) {
+      margin-bottom: 2.5rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__back-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1rem; // Mobile-first larger touch target
+    background: #f5f5f5;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    margin-bottom: 1.5rem; // Mobile-first smaller margin
+    font-size: 0.9rem; // Mobile-first smaller text
+    min-height: 44px; // Touch target
+
+    &:hover {
+      background: #e5e5e5;
+    }
+
+    @include mobile-first($breakpoint-md) {
+      padding: 0.5rem 1rem;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      min-height: auto;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; // Mobile-first smaller gap
+
+    @include mobile-first($breakpoint-md) {
+      gap: 2.5rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      gap: 3rem;
+    }
+  }
+
+  &__footer {
+    margin-top: 2.5rem; // Mobile-first smaller margin
+    padding: 1.5rem; // Mobile-first smaller padding
+    background: #f8f9fa;
+    border-radius: 6px; // Mobile-first smaller radius
+
+    h3 {
+      margin-bottom: 1rem;
+      color: #333;
+      font-size: 1.25rem; // Mobile-first smaller size
+
+      @include mobile-first($breakpoint-md) {
+        font-size: 1.5rem;
+      }
+    }
+
+    @include mobile-first($breakpoint-md) {
+      margin-top: 3rem;
+      padding: 1.75rem;
+      border-radius: 7px;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      margin-top: 4rem;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+  }
+}
+
+.demo-section {
+  h2 {
+    font-size: 1.25rem; // Mobile-first smaller size
+    margin-bottom: 0.5rem;
+    color: #333;
+    line-height: 1.3;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1.375rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 1.5rem;
+    }
+  }
+
+  p {
+    margin-bottom: 1.25rem; // Mobile-first smaller margin
+    color: #666;
+    font-size: 0.9rem; // Mobile-first smaller size
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1rem;
+      margin-bottom: 1.375rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+.demo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // min-height: 150px; // Mobile-first smaller height
+  padding: 1.5rem; // Mobile-first smaller padding
+  background: #f8f9fa;
+  border-radius: 6px; // Mobile-first smaller radius
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  &--sizes {
+    gap: 1rem; // Mobile-first smaller gap
+    flex-wrap: wrap;
+    flex-direction: column; // Mobile-first column layout
+
+    @include mobile-first($breakpoint-md) {
+      flex-direction: row;
+      gap: 1.5rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      gap: 3rem;
+    }
+
+    @include mobile-first($breakpoint-xl) {
+      gap: 4rem;
+    }
+  }
+
+  @include mobile-first($breakpoint-md) {
+    // min-height: 175px;
+    padding: 1.75rem;
+    border-radius: 7px;
+  }
+
+  @include mobile-first($breakpoint-lg) {
+    // min-height: 280px;
+    padding: 3rem;
+    border-radius: 12px;
+  }
+
+  @include mobile-first($breakpoint-xl) {
+    // min-height: 340px;
+    padding: 4rem;
+    border-radius: 16px;
+  }
+}
+
+.demo-card {
+  border-radius: 6px; // Mobile-first smaller radius
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); // Mobile-first smaller shadow
+  background: white;
+  // width: 180px; // Mobile-first smaller size
+  // height: 100px;
+
+  &--small {
+    width: 70px; // Mobile-first smaller size
+    height: 70px;
+    font-size: 0.75rem;
+
+    @include mobile-first($breakpoint-md) {
+      width: 75px;
+      height: 75px;
+      font-size: 0.775rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      width: 120px;
+      height: 120px;
+      font-size: 1rem;
+    }
+
+    @include mobile-first($breakpoint-xl) {
+      width: 150px;
+      height: 150px;
+      font-size: 1.1rem;
+    }
+  }
+
+  &--medium {
+    width: 110px; // Mobile-first smaller size
+    height: 110px;
+    font-size: 0.85rem;
+
+    @include mobile-first($breakpoint-md) {
+      width: 115px;
+      height: 115px;
+      font-size: 0.875rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      width: 180px;
+      height: 180px;
+      font-size: 1.1rem;
+    }
+
+    @include mobile-first($breakpoint-xl) {
+      width: 220px;
+      height: 220px;
+      font-size: 1.3rem;
+    }
+  }
+
+  &--large {
+    width: 220px; // Mobile-first smaller size
+    height: 140px;
+    font-size: 1rem;
+
+    @include mobile-first($breakpoint-md) {
+      width: 230px;
+      height: 150px;
+      font-size: 1.05rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      width: 380px;
+      height: 240px;
+      font-size: 1.4rem;
+    }
+
+    @include mobile-first($breakpoint-xl) {
+      width: 450px;
+      height: 280px;
+      font-size: 1.6rem;
+    }
+  }
+
+  @include mobile-first($breakpoint-md) {
+    border-radius: 7px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.09);
+    width: 190px;
+    height: 110px;
+  }
+
+  @include mobile-first($breakpoint-lg) {
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+    width: 280px;
+    height: 180px;
+  }
+
+  @include mobile-first($breakpoint-xl) {
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    width: 320px;
+    height: 200px;
+  }
+
+  &--hover {
+    transition: transform 0.2s ease;
+  }
+
+  &--fast {
+    border: 2px solid #ffd700;
+  }
+}
+
+.card-front,
+.card-back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  // height: 100%;
+  padding: 1rem;
+  border-radius: inherit;
+
+  h3 {
+    font-size: 1.2rem; // Mobile-first smaller
+    margin: 0 0 0.5rem 0;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 1.6rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 2.2rem;
+    }
+
+    @include mobile-first($breakpoint-xl) {
+      font-size: 2.8rem;
+    }
+  }
+
+  p {
+    margin: 0;
+    text-align: center;
+    font-size: 0.7rem; // Mobile-first smaller
+    line-height: 1.4;
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 0.85rem;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    @include mobile-first($breakpoint-xl) {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.card-front {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+
+  &--info {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+
+  &--controlled {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  }
+}
+
+.card-back {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #333;
+
+  &--info {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  }
+
+  &--controlled {
+    background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+  }
+}
+
+.controlled-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; // Mobile-first smaller gap
+  width: 100%;
+
+  @include mobile-first($breakpoint-md) {
+    gap: 2rem;
+  }
+
+  @include mobile-first($breakpoint-lg) {
+    gap: 2.5rem;
+  }
+
+  @include mobile-first($breakpoint-xl) {
+    gap: 3rem;
+  }
+}
+
+.control-button {
+  padding: 0.75rem 1.5rem; // Mobile-first
+  background: #007acc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem; // Mobile-first smaller
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px; // Touch target
+  min-width: 120px;
+
+  &:hover {
+    background: #005999;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 122, 204, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @include mobile-first($breakpoint-md) {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    min-height: auto;
+    min-width: 140px;
+  }
+
+  @include mobile-first($breakpoint-lg) {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
+    min-width: 160px;
+    border-radius: 8px;
+  }
+
+  @include mobile-first($breakpoint-xl) {
+    padding: 1.4rem 3rem;
+    font-size: 1.2rem;
+    min-width: 180px;
+  }
+}
+
+.props-table {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.prop-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 4px;
+  align-items: center;
+
+  code {
+    background: #f1f3f4;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #d73a49;
+  }
+
+  span {
+    color: #666;
+    font-size: 0.9rem;
+  }
+}
+
+// Mobile-first responsive adjustments
+.controlled-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; // Mobile-first smaller gap
+
+  @include mobile-first($breakpoint-md) {
+    gap: 1.5rem;
+  }
+}
+
+.control-button {
+  padding: 0.75rem 1.5rem; // Mobile-first larger touch target
+  background: #007acc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem; // Mobile-first smaller text
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-height: 44px; // Touch target
+  min-width: 120px;
+
+  &:hover {
+    background: #005999;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  @include mobile-first($breakpoint-md) {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    min-height: auto;
+  }
+}
+
+.props-table {
+  display: grid;
+  gap: 0.375rem; // Mobile-first smaller gap
+
+  @include mobile-first($breakpoint-md) {
+    gap: 0.5rem;
+  }
+}
+
+.prop-row {
+  display: grid;
+  grid-template-columns: 1fr; // Mobile-first single column
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 4px;
+  align-items: center;
+
+  code {
+    background: #f1f3f4;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+    font-size: 0.85rem; // Mobile-first smaller size
+    font-weight: 600;
+    color: #d73a49;
+    word-break: break-all; // Mobile-first word breaking
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 0.9rem;
+      word-break: normal;
+    }
+  }
+
+  span {
+    color: #666;
+    font-size: 0.85rem; // Mobile-first smaller size
+
+    @include mobile-first($breakpoint-md) {
+      font-size: 0.9rem;
+    }
+  }
+
+  @include mobile-first($breakpoint-md) {
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+  }
+}
+
+// Mobile-only optimizations for very small screens
+@include mobile-only {
+  .flip-element-page {
+    padding: 0.75rem;
+
+    &__header h1 {
+      font-size: 1.75rem;
+    }
+  }
+
+  .demo-container {
+    padding: 1rem;
+    // min-height: 120px;
+  }
+
+  // .demo-card {
+  //   width: 160px;
+  //   height: 90px;
+
+  //   &--small {
+  //     width: 60px;
+  //     height: 60px;
+  //   }
+
+  //   &--medium {
+  //     width: 100px;
+  //     height: 100px;
+  //   }
+
+  //   &--large {
+  //     width: 200px;
+  //     height: 120px;
+  //   }
+  // }
+}

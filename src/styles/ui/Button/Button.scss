@@ -1,0 +1,503 @@
+@use "../../mixins" as *;
+
+// Base button component with responsive design
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem; // Mobile-first larger touch targets
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem; // Mobile-first smaller text
+  font-weight: 500;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  min-height: 44px; // Touch target
+  min-width: 120px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+
+  &:focus {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  @include mobile-first($breakpoint-md) {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    min-height: auto;
+    min-width: 140px;
+  }
+
+  @include mobile-first($breakpoint-lg) {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    min-width: 160px;
+    border-radius: 8px;
+  }
+
+  // Button variants
+  &--primary {
+    background: #667eea;
+    color: white;
+
+    &:hover:not(:disabled) {
+      background: #5a67d8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
+    }
+  }
+
+  &--secondary {
+    background: #f8f9fa;
+    color: #333;
+    border: 1px solid #e5e5e5;
+
+    &:hover:not(:disabled) {
+      background: #e9ecef;
+      border-color: #667eea;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      background: #dee2e6;
+    }
+  }
+
+  &--success {
+    background: #27ae60;
+    color: white;
+
+    &:hover:not(:disabled) {
+      background: #219a52;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  &--warning {
+    background: #f39c12;
+    color: white;
+
+    &:hover:not(:disabled) {
+      background: #e67e22;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  &--danger {
+    background: #e74c3c;
+    color: white;
+
+    &:hover:not(:disabled) {
+      background: #c0392b;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    border: 2px solid #667eea;
+    color: #667eea;
+
+    &:hover:not(:disabled) {
+      background: #667eea;
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &.ui-button--success {
+      border-color: #27ae60;
+      color: #27ae60;
+
+      &:hover:not(:disabled) {
+        background: #27ae60;
+        color: white;
+      }
+    }
+
+    &.ui-button--warning {
+      border-color: #f39c12;
+      color: #f39c12;
+
+      &:hover:not(:disabled) {
+        background: #f39c12;
+        color: white;
+      }
+    }
+
+    &.ui-button--danger {
+      border-color: #e74c3c;
+      color: #e74c3c;
+
+      &:hover:not(:disabled) {
+        background: #e74c3c;
+        color: white;
+      }
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: #667eea;
+    border: 1px solid transparent;
+
+    &:hover:not(:disabled) {
+      background: rgba(102, 126, 234, 0.1);
+      border-color: rgba(102, 126, 234, 0.2);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      background: rgba(102, 126, 234, 0.15);
+    }
+  }
+
+  &--gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #5a67d8 0%, #6b4190 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &.ui-button--gradient-2 {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+
+      &:hover:not(:disabled) {
+        background: linear-gradient(135deg, #e87fe9 0%, #f3455a 100%);
+      }
+    }
+
+    &.ui-button--gradient-3 {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+      &:hover:not(:disabled) {
+        background: linear-gradient(135deg, #3d8bfe 0%, #00d9fe 100%);
+      }
+    }
+  }
+
+  // Size variants
+  &--small {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    min-height: 36px;
+    min-width: 100px;
+    border-radius: 4px;
+
+    @include mobile-first($breakpoint-md) {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      min-height: auto;
+      min-width: 110px;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      padding: 0.625rem 1.25rem;
+      font-size: 0.9rem;
+      min-width: 120px;
+      border-radius: 6px;
+    }
+  }
+
+  &--large {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    min-height: 52px;
+    min-width: 160px;
+    border-radius: 8px;
+
+    @include mobile-first($breakpoint-md) {
+      padding: 1.125rem 2.25rem;
+      font-size: 1.125rem;
+      min-height: auto;
+      min-width: 180px;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      padding: 1.25rem 2.5rem;
+      font-size: 1.2rem;
+      min-width: 200px;
+      border-radius: 10px;
+    }
+  }
+
+  &--full-width {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  &--icon-only {
+    min-width: 44px;
+    width: 44px;
+    padding: 0;
+    border-radius: 50%;
+
+    @include mobile-first($breakpoint-md) {
+      min-width: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      min-width: 48px;
+      width: 48px;
+    }
+
+    &.ui-button--small {
+      min-width: 36px;
+      width: 36px;
+
+      @include mobile-first($breakpoint-md) {
+        min-width: 32px;
+        width: 32px;
+      }
+
+      @include mobile-first($breakpoint-lg) {
+        min-width: 36px;
+        width: 36px;
+      }
+    }
+
+    &.ui-button--large {
+      min-width: 56px;
+      width: 56px;
+
+      @include mobile-first($breakpoint-md) {
+        min-width: 52px;
+        width: 52px;
+      }
+
+      @include mobile-first($breakpoint-lg) {
+        min-width: 60px;
+        width: 60px;
+      }
+    }
+  }
+
+  // Loading state
+  &--loading {
+    color: transparent;
+    pointer-events: none;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: ui-button-spin 1s linear infinite;
+      color: inherit;
+    }
+
+    &.ui-button--primary::after,
+    &.ui-button--success::after,
+    &.ui-button--warning::after,
+    &.ui-button--danger::after,
+    &.ui-button--gradient::after {
+      border-top-color: white;
+    }
+
+    &.ui-button--secondary::after,
+    &.ui-button--ghost::after {
+      border-top-color: #667eea;
+    }
+
+    &.ui-button--outline::after {
+      border-top-color: currentColor;
+    }
+  }
+
+  // Button with icon
+  &__icon {
+    font-size: 1em;
+    line-height: 1;
+
+    &--left {
+      margin-right: 0.5rem;
+      margin-left: -0.25rem;
+    }
+
+    &--right {
+      margin-left: 0.5rem;
+      margin-right: -0.25rem;
+    }
+  }
+
+  // Back link button (special case)
+  &--back-link {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    // For light backgrounds
+    &.ui-button--back-link-light {
+      background: #f5f5f5;
+      color: #333;
+      border-color: #e5e5e5;
+
+      &:hover:not(:disabled) {
+        background: #e5e5e5;
+        border-color: #667eea;
+      }
+    }
+  }
+}
+
+// Button group
+.ui-button-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+
+  &--attached {
+    gap: 0;
+
+    .ui-button {
+      border-radius: 0;
+      border-right-width: 0;
+
+      &:first-child {
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        border-right-width: 1px;
+      }
+
+      &:not(:last-child):not(:first-child) {
+        border-radius: 0;
+      }
+    }
+  }
+
+  &--vertical {
+    flex-direction: column;
+    align-items: stretch;
+
+    &.ui-button-group--attached {
+      .ui-button {
+        border-radius: 0;
+        border-bottom-width: 0;
+
+        &:first-child {
+          border-top-left-radius: 6px;
+          border-top-right-radius: 6px;
+          border-bottom-left-radius: 0;
+        }
+
+        &:last-child {
+          border-bottom-left-radius: 6px;
+          border-bottom-right-radius: 6px;
+          border-top-right-radius: 0;
+          border-bottom-width: 1px;
+        }
+      }
+    }
+  }
+
+  // Mobile-first responsive adjustments
+  @include mobile-only {
+    flex-direction: column;
+    align-items: stretch;
+
+    &:not(.ui-button-group--vertical) .ui-button {
+      width: 100%;
+      min-width: 100%;
+    }
+  }
+}
+
+// Keyframe animation for loading spinner
+@keyframes ui-button-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Mobile-only optimizations for very small screens
+@include mobile-only {
+  .ui-button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.85rem;
+    min-width: 110px;
+
+    &--small {
+      padding: 0.5rem 0.875rem;
+      font-size: 0.75rem;
+      min-width: 90px;
+    }
+
+    &--large {
+      padding: 1rem 1.75rem;
+      font-size: 0.95rem;
+      min-width: 140px;
+    }
+  }
+}

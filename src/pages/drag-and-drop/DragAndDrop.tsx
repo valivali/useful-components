@@ -1,10 +1,10 @@
 import "./DragAndDrop.scss"
 
 import React, { useCallback, useMemo, useState } from "react"
-import { Link } from "react-router-dom"
 import { match } from "ts-pattern"
 
 import DragAndDropElement, { type DragItem, type DropZone } from "@/components/DragAndDropElement"
+import { Container, DemoContainer, FeaturesList, H2, H3, PageFooter, PageHeader, PropsTable } from "@/styles/ui"
 
 // Task status types for the Kanban board
 interface Task extends DragItem {
@@ -210,20 +210,18 @@ const DragAndDropPage: React.FC = () => {
   )
 
   return (
-    <div className="drag-and-drop-page">
-      <header className="drag-and-drop-page__header">
-        <Link to="/" className="drag-and-drop-page__back-link">
-          ← Back to Components
-        </Link>
-        <h1>DragAndDropElement Component</h1>
-        <p>A powerful component for implementing HTML5 drag and drop functionality with visual feedback.</p>
-      </header>
+    <Container className="drag-and-drop-page">
+      <PageHeader
+        title="DragAndDropElement Component"
+        subtitle="A powerful component for implementing HTML5 drag and drop functionality with visual feedback."
+        backLink={{ to: "/", text: "← Back to Components" }}
+      />
 
       <main className="drag-and-drop-page__content">
-        <section className="demo-section">
-          <h2>Basic Drag and Drop</h2>
+        <div className="demo-section">
+          <H2>Basic Drag and Drop</H2>
           <p>Drag tasks between different status columns. Notice the visual feedback when hovering over drop zones.</p>
-          <div className="demo-container">
+          <DemoContainer>
             <DragAndDropElement
               items={BASIC_ITEMS}
               dropZones={BASIC_DROP_ZONES}
@@ -232,35 +230,35 @@ const DragAndDropPage: React.FC = () => {
               onDragEnd={handleDragEnd}
               className="basic-demo"
             />
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
 
-        <section className="demo-section">
-          <h2>Kanban Board - Items Move Between Columns</h2>
+        <div className="demo-section">
+          <H2>Kanban Board - Items Move Between Columns</H2>
           <p>
             This example shows items actually moving between columns when dropped. The state management is handled in the demo component,
             not the hook.
           </p>
-          <div className="demo-container">
+          <DemoContainer>
             <KanbanBoard />
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
 
-        <section className="demo-section">
-          <h2>Type-Restricted Drag and Drop</h2>
+        <div className="demo-section">
+          <H2>Type-Restricted Drag and Drop</H2>
           <p>Items can only be dropped in compatible zones. Try dropping fruits in the vegetable box - it won't work!</p>
-          <div className="demo-container">
+          <DemoContainer>
             <DragAndDropElement items={TYPED_ITEMS} dropZones={TYPED_DROP_ZONES} onDrop={handleTypedDrop} className="typed-demo" />
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
 
-        <section className="demo-section">
-          <h2>Interactive Shopping Demo</h2>
+        <div className="demo-section">
+          <H2>Interactive Shopping Demo</H2>
           <p>Drag products between the store, cart, and wishlist. Items move between collections dynamically.</p>
-          <div className="demo-container">
+          <DemoContainer>
             <div className="shopping-demo">
-              <div className="shopping-section">
-                <h3>🏪 Available Products</h3>
+              <div className="shopping-area">
+                <H3>🏪 Available Products</H3>
                 <DragAndDropElement
                   items={availableProducts}
                   dropZones={[SHOPPING_DROP_ZONES[2]]} // Only products zone
@@ -269,8 +267,8 @@ const DragAndDropPage: React.FC = () => {
                 />
               </div>
 
-              <div className="shopping-section">
-                <h3>🛒 Shopping Cart ({cart.length} items)</h3>
+              <div className="shopping-area">
+                <H3>🛒 Shopping Cart ({cart.length} items)</H3>
                 <DragAndDropElement
                   items={cartItems}
                   dropZones={[SHOPPING_DROP_ZONES[0]]} // Only cart zone
@@ -279,8 +277,8 @@ const DragAndDropPage: React.FC = () => {
                 />
               </div>
 
-              <div className="shopping-section">
-                <h3>💝 Wishlist ({wishlist.length} items)</h3>
+              <div className="shopping-area">
+                <H3>💝 Wishlist ({wishlist.length} items)</H3>
                 <DragAndDropElement
                   items={wishlistItems}
                   dropZones={[SHOPPING_DROP_ZONES[1]]} // Only wishlist zone
@@ -289,7 +287,7 @@ const DragAndDropPage: React.FC = () => {
                 />
               </div>
 
-              {/* Global drop zones for cross-section dragging */}
+              {/* Global drop zones for cross-area dragging */}
               <div className="global-drop-zones">
                 <div className="drop-zone-row">
                   {SHOPPING_DROP_ZONES.map(zone => (
@@ -304,13 +302,13 @@ const DragAndDropPage: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
 
-        <section className="demo-section">
-          <h2>Custom Styled Elements</h2>
+        <div className="demo-section">
+          <H2>Custom Styled Elements</H2>
           <p>Customize the appearance of draggable items and drop zones.</p>
-          <div className="demo-container">
+          <DemoContainer>
             <DragAndDropElement
               items={CUSTOM_ITEMS}
               dropZones={CUSTOM_DROP_ZONES}
@@ -319,59 +317,39 @@ const DragAndDropPage: React.FC = () => {
               itemClassName="custom-draggable"
               dropZoneClassName="custom-drop-zone"
             />
-          </div>
-        </section>
+          </DemoContainer>
+        </div>
       </main>
 
-      <footer className="drag-and-drop-page__footer">
-        <h3>Props</h3>
-        <div className="props-table">
-          <div className="prop-row">
-            <code>items</code>
-            <span>Array of draggable items with id, content, and optional type</span>
-          </div>
-          <div className="prop-row">
-            <code>dropZones</code>
-            <span>Array of drop zones with id, label, and optional accepts array</span>
-          </div>
-          <div className="prop-row">
-            <code>onDrop</code>
-            <span>Callback when item is dropped: (itemId, dropZoneId) =&gt; void</span>
-          </div>
-          <div className="prop-row">
-            <code>onDragStart</code>
-            <span>Callback when dragging starts: (itemId) =&gt; void</span>
-          </div>
-          <div className="prop-row">
-            <code>onDragEnd</code>
-            <span>Callback when dragging ends: (itemId) =&gt; void</span>
-          </div>
-          <div className="prop-row">
-            <code>className</code>
-            <span>Additional CSS class for the container</span>
-          </div>
-          <div className="prop-row">
-            <code>itemClassName</code>
-            <span>Additional CSS class for draggable items</span>
-          </div>
-          <div className="prop-row">
-            <code>dropZoneClassName</code>
-            <span>Additional CSS class for drop zones</span>
-          </div>
-        </div>
+      <PageFooter className="drag-and-drop-page__footer">
+        <H3>Props</H3>
+        <PropsTable
+          props={[
+            { name: "items", description: "Array of draggable items with id, content, and optional type" },
+            { name: "dropZones", description: "Array of drop zones with id, label, and optional accepts array" },
+            { name: "onDrop", description: "Callback when item is dropped", type: "(itemId, dropZoneId) => void" },
+            { name: "onDragStart", description: "Callback when dragging starts", type: "(itemId) => void" },
+            { name: "onDragEnd", description: "Callback when dragging ends", type: "(itemId) => void" },
+            { name: "className", description: "Additional CSS class for the container" },
+            { name: "itemClassName", description: "Additional CSS class for draggable items" },
+            { name: "dropZoneClassName", description: "Additional CSS class for drop zones" }
+          ]}
+        />
 
-        <h3>Features</h3>
-        <ul className="features-list">
-          <li>✨ HTML5 drag and drop with visual feedback</li>
-          <li>🔒 Type-based restrictions for drop zones</li>
-          <li>🎨 Fully customizable styling</li>
-          <li>📱 Responsive design</li>
-          <li>⚡ Smooth animations and transitions</li>
-          <li>🎮 Event callbacks for custom logic</li>
-          <li>♿ Accessible drag and drop interactions</li>
-        </ul>
-      </footer>
-    </div>
+        <H3>Features</H3>
+        <FeaturesList
+          features={[
+            "✨ HTML5 drag and drop with visual feedback",
+            "🔒 Type-based restrictions for drop zones",
+            "🎨 Fully customizable styling",
+            "📱 Responsive design",
+            "⚡ Smooth animations and transitions",
+            "🎮 Event callbacks for custom logic",
+            "♿ Accessible drag and drop interactions"
+          ]}
+        />
+      </PageFooter>
+    </Container>
   )
 }
 

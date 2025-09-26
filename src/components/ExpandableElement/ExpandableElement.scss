@@ -1,0 +1,527 @@
+@use "../../styles/mixins" as *;
+
+.expandable-element {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &__trigger {
+    cursor: pointer;
+    user-select: none;
+    transition: all var(--animation-speed, 300ms) ease-in-out;
+
+    &:focus {
+      outline: 2px solid #007acc;
+      outline-offset: 2px;
+    }
+  }
+
+  &:not(&--clickable) &__trigger {
+    cursor: default;
+  }
+
+  &__content {
+    overflow: hidden;
+    transition: all var(--animation-speed, 300ms) ease-in-out;
+
+    &--collapsed-horizontal {
+      width: 0;
+    }
+
+    &--collapsed-vertical {
+      height: 0;
+    }
+
+    &--expanded-horizontal {
+      width: var(--content-width, auto);
+    }
+
+    &--expanded-vertical {
+      height: var(--content-height, auto);
+    }
+
+    &--no-smooth {
+      transition: none;
+    }
+  }
+
+  &__content-inner {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  &--expand-left,
+  &--expand-right {
+    flex-direction: row;
+
+    .expandable-element__content-inner {
+      height: max-content;
+      min-height: 100%;
+      width: max-content;
+      min-width: auto;
+    }
+  }
+
+  &--expand-left {
+    .expandable-element__content {
+      order: -1;
+    }
+  }
+
+  &--expand-top {
+    flex-direction: column-reverse;
+  }
+
+  &--clickable &__trigger:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
+  }
+
+  &--clickable &__trigger:active {
+    transform: translateY(0);
+  }
+
+  &--expanded {
+    .expandable-element__trigger {
+      &::after {
+        content: "";
+        transition: transform var(--animation-speed, 300ms) ease-in-out;
+      }
+    }
+  }
+
+  &--collapsed {
+    .expandable-element__content {
+      opacity: 0;
+    }
+  }
+
+  &--expanded &__content {
+    opacity: 1;
+  }
+
+  &--fold-up &__content {
+    transform-origin: bottom;
+  }
+
+  &--fold-down &__content {
+    transform-origin: top;
+  }
+
+  &--fold-left &__content {
+    transform-origin: right;
+  }
+
+  &--fold-right &__content {
+    transform-origin: left;
+  }
+
+  &.accordion-style {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px; // Smaller radius for mobile
+    overflow: hidden;
+
+    .expandable-element__trigger {
+      padding: 12px; // Smaller padding for mobile
+      background: #f8f9fa;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      font-size: 0.9rem; // Smaller text on mobile
+      min-height: 44px; // Minimum touch target
+
+      &::after {
+        content: "▼";
+        transition: transform var(--animation-speed, 300ms) ease-in-out;
+        font-size: 14px; // Larger for better visibility on mobile
+        color: #666;
+        flex-shrink: 0;
+      }
+
+      @include mobile-first($breakpoint-md) {
+        padding: 16px;
+        font-size: 1rem;
+        min-height: auto;
+
+        &::after {
+          font-size: 12px;
+        }
+      }
+    }
+
+    .expandable-element__content {
+      background: #ffffff;
+    }
+
+    .expandable-element__content-inner {
+      padding: 12px; // Smaller padding for mobile
+
+      @include mobile-first($breakpoint-md) {
+        padding: 16px;
+      }
+    }
+
+    &.expandable-element--expanded .expandable-element__trigger::after {
+      transform: rotate(180deg);
+    }
+
+    &.expandable-element--collapsed .expandable-element__trigger {
+      border-bottom: none;
+    }
+
+    @include mobile-first($breakpoint-md) {
+      border-radius: 8px;
+    }
+  }
+
+  &.mobile-menu-style {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    width: 100%; // Ensure full width on all devices
+
+    .expandable-element__trigger {
+      position: absolute;
+      top: 0.75rem; // Smaller spacing for mobile
+      left: 0.75rem;
+      z-index: 1001;
+      background: #333;
+      color: white;
+      padding: 10px; // Smaller padding for mobile
+      border-radius: 6px;
+      border: none;
+      min-height: 44px; // Touch target
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &::before {
+        content: "☰";
+        font-size: 16px; // Slightly smaller for mobile
+      }
+
+      @include mobile-first($breakpoint-md) {
+        top: 20px;
+        left: 20px;
+        padding: 12px;
+        border-radius: 4px;
+        min-height: auto;
+        min-width: auto;
+
+        &::before {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .expandable-element__content {
+      background: rgba(0, 0, 0, 0.95); // Slightly more opaque for mobile
+      backdrop-filter: blur(10px);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem; // Add padding for mobile
+      box-sizing: border-box;
+
+      @include mobile-first($breakpoint-md) {
+        background: rgba(0, 0, 0, 0.9);
+        padding: 0;
+      }
+    }
+
+    .expandable-element__content-inner {
+      color: white;
+      text-align: center;
+      width: 100%; // Full width on mobile
+      min-width: auto;
+      max-width: 90%; // Prevent overflow
+
+      @include mobile-first($breakpoint-md) {
+        width: auto;
+        max-width: none;
+      }
+    }
+
+    &.expandable-element--expanded .expandable-element__trigger::before {
+      content: "✕";
+    }
+  }
+
+  &.dropdown-style {
+    position: relative;
+    display: block; // Full width on mobile
+    width: 100%;
+
+    .expandable-element__trigger {
+      padding: 12px 16px;
+      background: #007acc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; // Better spacing on mobile
+      gap: 8px;
+      width: 100%; // Full width on mobile
+      min-height: 44px; // Touch target
+      font-size: 0.9rem;
+
+      &::after {
+        content: "▼";
+        font-size: 12px; // Larger for mobile
+        transition: transform var(--animation-speed, 300ms) ease-in-out;
+        flex-shrink: 0;
+      }
+
+      @include mobile-first($breakpoint-md) {
+        border-radius: 4px;
+        width: auto;
+        min-height: auto;
+        font-size: 1rem;
+        justify-content: flex-start;
+
+        &::after {
+          font-size: 10px;
+        }
+      }
+    }
+
+    .expandable-element__content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0; // Full width on mobile
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+
+      @include mobile-first($breakpoint-md) {
+        right: auto;
+        min-width: 200px;
+        border-radius: 4px;
+      }
+    }
+
+    .expandable-element__content-inner {
+      padding: 8px 0;
+      width: 100%; // Full width on mobile
+      min-width: auto;
+
+      @include mobile-first($breakpoint-md) {
+        width: auto;
+        min-width: 100%;
+      }
+    }
+
+    &.expandable-element--expanded .expandable-element__trigger::after {
+      transform: rotate(180deg);
+    }
+
+    @include mobile-first($breakpoint-md) {
+      display: inline-block;
+      width: auto;
+    }
+  }
+
+  &.sidebar-style {
+    height: 100vh;
+    background: #2c3e50;
+    color: white;
+    transition: width var(--animation-speed, 300ms) ease-in-out;
+    position: relative; // For mobile overlay
+
+    .expandable-element__trigger {
+      padding: 15px; // Smaller padding for mobile
+      background: #34495e;
+      text-align: center;
+      border-bottom: 1px solid #4a6741;
+      font-size: 0.9rem;
+      min-height: 44px; // Touch target
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include mobile-first($breakpoint-md) {
+        padding: 20px;
+        font-size: 1rem;
+        min-height: auto;
+      }
+    }
+
+    .expandable-element__content-inner {
+      padding: 15px; // Smaller padding for mobile
+      width: auto;
+      min-width: auto;
+
+      @include mobile-first($breakpoint-md) {
+        padding: 20px;
+      }
+    }
+
+    &.expandable-element--collapsed {
+      width: 50px; // Smaller collapsed width on mobile
+
+      .expandable-element__trigger {
+        writing-mode: horizontal-tb; // Keep horizontal on mobile
+        text-orientation: mixed;
+        font-size: 0.8rem;
+
+        @include mobile-first($breakpoint-md) {
+          writing-mode: vertical-rl;
+          font-size: 1rem;
+        }
+      }
+
+      @include mobile-first($breakpoint-md) {
+        width: 60px;
+      }
+    }
+
+    &.expandable-element--expanded {
+      width: 200px; // Smaller expanded width on mobile
+
+      @include mobile-first($breakpoint-md) {
+        width: 250px;
+      }
+    }
+  }
+
+  &.card-style {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px; // Smaller radius for mobile
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: box-shadow var(--animation-speed, 300ms) ease-in-out;
+    margin: 0.5rem 0; // Add margin for mobile spacing
+
+    .expandable-element__trigger {
+      padding: 15px; // Smaller padding for mobile
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 600;
+      text-align: center;
+      font-size: 0.9rem;
+      min-height: 44px; // Touch target
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      @include mobile-first($breakpoint-md) {
+        padding: 20px;
+        font-size: 1rem;
+        min-height: auto;
+      }
+    }
+
+    .expandable-element__content-inner {
+      padding: 15px; // Smaller padding for mobile
+
+      @include mobile-first($breakpoint-md) {
+        padding: 20px;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12); // Smaller shadow on mobile
+
+      @include mobile-first($breakpoint-md) {
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    &.expandable-element--expanded {
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); // Smaller shadow on mobile
+
+      @include mobile-first($breakpoint-md) {
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    @include mobile-first($breakpoint-md) {
+      border-radius: 12px;
+      margin: 0;
+    }
+  }
+
+  &.bounce-animation {
+    .expandable-element__content {
+      transition: all var(--animation-speed, 300ms) cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+  }
+
+  &.slide-animation {
+    .expandable-element__content {
+      transition: all var(--animation-speed, 300ms) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+  }
+
+  &.fade-animation {
+    .expandable-element__content {
+      transition:
+        opacity var(--animation-speed, 300ms) ease-in-out,
+        height var(--animation-speed, 300ms) ease-in-out,
+        width var(--animation-speed, 300ms) ease-in-out;
+    }
+  }
+}
+
+// Mobile-specific overrides (only for very small screens)
+@include mobile-only {
+  .expandable-element {
+    &.dropdown-style .expandable-element__content {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    &.sidebar-style {
+      &.expandable-element--expanded {
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expandable-element {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@media (prefers-contrast: more) {
+  .expandable-element {
+    &__trigger {
+      border: 2px solid currentColor;
+    }
+
+    &.accordion-style .expandable-element__trigger {
+      border-bottom-width: 2px;
+    }
+  }
+}
