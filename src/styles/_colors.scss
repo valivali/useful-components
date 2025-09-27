@@ -1,0 +1,162 @@
+// =============================================================================
+// COLOR SYSTEM
+// =============================================================================
+// Centralized color variables for the entire application
+// Use these variables instead of hardcoded colors in your SCSS files
+
+// =============================================================================
+// BRAND COLORS
+// =============================================================================
+$primary-color: #667eea;
+$primary-hover: #5a67d8;
+$primary-light: #747bff;
+$primary-dark: #535bf2;
+
+// =============================================================================
+// SEMANTIC COLORS
+// =============================================================================
+$success-color: #27ae60;
+$success-hover: #219a52;
+$warning-color: #f39c12;
+$warning-hover: #e67e22;
+$error-color: #e74c3c;
+$error-hover: #c0392b;
+$info-color: #667eea;
+
+// =============================================================================
+// NEUTRAL COLORS
+// =============================================================================
+// Grays
+$gray-50: #f8f9fa;
+$gray-100: #f5f5f5;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+
+// Text colors
+$text-primary: #333;
+$text-secondary: #666;
+$text-muted: #888;
+$text-light: rgba(255, 255, 255, 0.87);
+$text-dark: #213547;
+$text-white: #fff;
+
+// =============================================================================
+// BACKGROUND COLORS
+// =============================================================================
+$background-primary: #ffffff;
+$background-secondary: #f8f9fa;
+$background-tertiary: #f0f2f5;
+$background-dark: #242424;
+$background-darker: #1a1a1a;
+$background-navy: #2c3e50;
+$background-navy-light: #34495e;
+
+// =============================================================================
+// BORDER COLORS
+// =============================================================================
+$border-light: #e5e5e5;
+$border-medium: #d1d5db;
+$border-dark: #9ca3af;
+$border-white: rgba(255, 255, 255, 0.2);
+$border-white-light: rgba(255, 255, 255, 0.1);
+$border-white-medium: rgba(255, 255, 255, 0.3);
+
+// =============================================================================
+// SHADOW COLORS
+// =============================================================================
+$shadow-light: rgba(0, 0, 0, 0.05);
+$shadow-medium: rgba(0, 0, 0, 0.1);
+$shadow-dark: rgba(0, 0, 0, 0.15);
+$shadow-darker: rgba(0, 0, 0, 0.2);
+$shadow-darkest: rgba(0, 0, 0, 0.3);
+
+// Primary color shadows
+$shadow-primary-light: rgba(102, 126, 234, 0.1);
+$shadow-primary-medium: rgba(102, 126, 234, 0.2);
+$shadow-primary-dark: rgba(102, 126, 234, 0.3);
+$shadow-primary-darker: rgba(102, 126, 234, 0.4);
+
+// Success color shadows
+$shadow-success: rgba(39, 174, 96, 0.3);
+
+// Warning color shadows
+$shadow-warning: rgba(243, 156, 18, 0.3);
+
+// Error color shadows
+$shadow-error: rgba(231, 76, 60, 0.3);
+
+// =============================================================================
+// GRADIENT COLORS
+// =============================================================================
+// Primary gradients
+$gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$gradient-primary-hover: linear-gradient(135deg, #5a67d8 0%, #6b4190 100%);
+
+// Accent gradients
+$gradient-pink: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+$gradient-pink-hover: linear-gradient(135deg, #e87fe9 0%, #f3455a 100%);
+$gradient-blue: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+$gradient-blue-hover: linear-gradient(135deg, #3d8bfe 0%, #00d9fe 100%);
+$gradient-pastel: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+
+// Text gradients
+$gradient-text-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$gradient-text-light: linear-gradient(45deg, #fff, #f0f0f0);
+
+// Action gradients
+$gradient-success: linear-gradient(135deg, #ff6b6b, #ee5a24);
+$gradient-warning: linear-gradient(135deg, #a8e6cf, #26de81);
+$gradient-info: linear-gradient(135deg, #ffd93d, #ff6b35);
+
+// =============================================================================
+// OVERLAY COLORS
+// =============================================================================
+$overlay-light: rgba(255, 255, 255, 0.1);
+$overlay-medium: rgba(255, 255, 255, 0.15);
+$overlay-dark: rgba(255, 255, 255, 0.2);
+$overlay-black-light: rgba(0, 0, 0, 0.1);
+$overlay-black-medium: rgba(0, 0, 0, 0.25);
+$overlay-black-dark: rgba(0, 0, 0, 0.3);
+
+// =============================================================================
+// COMPONENT-SPECIFIC COLORS
+// =============================================================================
+// Button colors
+$button-bg-light: #f9f9f9;
+$button-bg-dark: #1a1a1a;
+
+// Card colors
+$card-bg-primary: #ffffff;
+$card-bg-glass: rgba(255, 255, 255, 0.15);
+$card-bg-dark: #2c3e50;
+
+// Status colors
+$status-primary: #667eea;
+$status-success: #27ae60;
+$status-warning: #f39c12;
+$status-error: #e74c3c;
+$status-glass: rgba(255, 255, 255, 0.1);
+$status-glass-hover: rgba(255, 255, 255, 0.2);
+
+// Accent colors
+$accent-green: #a8e6cf;
+$accent-light-green: #26de81;
+
+// =============================================================================
+// THEME COLORS
+// =============================================================================
+// Light theme
+$light-bg: #ffffff;
+$light-text: #213547;
+$light-border: #e5e5e5;
+
+// Dark theme
+$dark-bg: #242424;
+$dark-text: rgba(255, 255, 255, 0.87);
+$dark-border: rgba(255, 255, 255, 0.2);

@@ -1,22 +1,21 @@
 @use "../../mixins" as *;
 
-// Base button component with responsive design
 .ui-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem; // Mobile-first larger touch targets
+  padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 6px;
-  font-size: 0.9rem; // Mobile-first smaller text
+  font-size: 0.9rem;
   font-weight: 500;
   font-family: inherit;
   line-height: 1;
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
-  min-height: 44px; // Touch target
+  min-height: 44px;
   min-width: 120px;
   box-sizing: border-box;
   position: relative;
@@ -24,7 +23,7 @@
 
   &:focus {
     outline: 2px solid transparent;
-    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 0 0 2px $shadow-primary-darker;
   }
 
   &:disabled {
@@ -47,49 +46,48 @@
     border-radius: 8px;
   }
 
-  // Button variants
   &--primary {
-    background: #667eea;
-    color: white;
+    background: $primary-color;
+    color: $text-white;
 
     &:hover:not(:disabled) {
-      background: #5a67d8;
+      background: $primary-hover;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 4px 12px $shadow-primary-dark;
     }
 
     &:active:not(:disabled) {
       transform: translateY(0);
-      box-shadow: 0 2px 6px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 2px 6px $shadow-primary-dark;
     }
   }
 
   &--secondary {
-    background: #f8f9fa;
-    color: #333;
-    border: 1px solid #e5e5e5;
+    background: $gray-50;
+    color: $text-primary;
+    border: 1px solid $border-light;
 
     &:hover:not(:disabled) {
-      background: #e9ecef;
-      border-color: #667eea;
+      background: $gray-200;
+      border-color: $primary-color;
       transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px $shadow-medium;
     }
 
     &:active:not(:disabled) {
       transform: translateY(0);
-      background: #dee2e6;
+      background: $gray-300;
     }
   }
 
   &--success {
-    background: #27ae60;
-    color: white;
+    background: $success-color;
+    color: $text-white;
 
     &:hover:not(:disabled) {
-      background: #219a52;
+      background: $success-hover;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+      box-shadow: 0 4px 12px $shadow-success;
     }
 
     &:active:not(:disabled) {
@@ -98,13 +96,13 @@
   }
 
   &--warning {
-    background: #f39c12;
-    color: white;
+    background: $warning-color;
+    color: $text-white;
 
     &:hover:not(:disabled) {
-      background: #e67e22;
+      background: $warning-hover;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+      box-shadow: 0 4px 12px $shadow-warning;
     }
 
     &:active:not(:disabled) {
@@ -113,13 +111,13 @@
   }
 
   &--danger {
-    background: #e74c3c;
-    color: white;
+    background: $error-color;
+    color: $text-white;
 
     &:hover:not(:disabled) {
-      background: #c0392b;
+      background: $error-hover;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+      box-shadow: 0 4px 12px $shadow-error;
     }
 
     &:active:not(:disabled) {
@@ -129,14 +127,14 @@
 
   &--outline {
     background: transparent;
-    border: 2px solid #667eea;
-    color: #667eea;
+    border: 2px solid $primary-color;
+    color: $primary-color;
 
     &:hover:not(:disabled) {
-      background: #667eea;
-      color: white;
+      background: $primary-color;
+      color: $text-white;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+      box-shadow: 0 4px 12px $shadow-primary-medium;
     }
 
     &:active:not(:disabled) {
@@ -144,62 +142,62 @@
     }
 
     &.ui-button--success {
-      border-color: #27ae60;
-      color: #27ae60;
+      border-color: $success-color;
+      color: $success-color;
 
       &:hover:not(:disabled) {
-        background: #27ae60;
-        color: white;
+        background: $success-color;
+        color: $text-white;
       }
     }
 
     &.ui-button--warning {
-      border-color: #f39c12;
-      color: #f39c12;
+      border-color: $warning-color;
+      color: $warning-color;
 
       &:hover:not(:disabled) {
-        background: #f39c12;
-        color: white;
+        background: $warning-color;
+        color: $text-white;
       }
     }
 
     &.ui-button--danger {
-      border-color: #e74c3c;
-      color: #e74c3c;
+      border-color: $error-color;
+      color: $error-color;
 
       &:hover:not(:disabled) {
-        background: #e74c3c;
-        color: white;
+        background: $error-color;
+        color: $text-white;
       }
     }
   }
 
   &--ghost {
     background: transparent;
-    color: #667eea;
+    color: $primary-color;
     border: 1px solid transparent;
 
     &:hover:not(:disabled) {
-      background: rgba(102, 126, 234, 0.1);
-      border-color: rgba(102, 126, 234, 0.2);
+      background: $shadow-primary-light;
+      border-color: $shadow-primary-medium;
       transform: translateY(-1px);
     }
 
     &:active:not(:disabled) {
       transform: translateY(0);
-      background: rgba(102, 126, 234, 0.15);
+      background: $shadow-primary-medium;
     }
   }
 
   &--gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: $gradient-primary;
+    color: $text-white;
     border: none;
 
     &:hover:not(:disabled) {
-      background: linear-gradient(135deg, #5a67d8 0%, #6b4190 100%);
+      background: $gradient-primary-hover;
       transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 6px 16px $shadow-primary-darker;
     }
 
     &:active:not(:disabled) {
@@ -207,23 +205,22 @@
     }
 
     &.ui-button--gradient-2 {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background: $gradient-pink;
 
       &:hover:not(:disabled) {
-        background: linear-gradient(135deg, #e87fe9 0%, #f3455a 100%);
+        background: $gradient-pink-hover;
       }
     }
 
     &.ui-button--gradient-3 {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      background: $gradient-blue;
 
       &:hover:not(:disabled) {
-        background: linear-gradient(135deg, #3d8bfe 0%, #00d9fe 100%);
+        background: $gradient-blue-hover;
       }
     }
   }
 
-  // Size variants
   &--small {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
@@ -321,7 +318,6 @@
     }
   }
 
-  // Loading state
   &--loading {
     color: transparent;
     pointer-events: none;
@@ -348,7 +344,7 @@
 
     &.ui-button--secondary::after,
     &.ui-button--ghost::after {
-      border-top-color: #667eea;
+      border-top-color: $primary-color;
     }
 
     &.ui-button--outline::after {
@@ -356,7 +352,6 @@
     }
   }
 
-  // Button with icon
   &__icon {
     font-size: 1em;
     line-height: 1;
@@ -372,39 +367,24 @@
     }
   }
 
-  // Back link button (special case)
   &--back-link {
-    background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-
-    &:hover:not(:disabled) {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-1px);
-    }
-
     &:active:not(:disabled) {
       transform: translateY(0);
     }
 
-    // For light backgrounds
     &.ui-button--back-link-light {
-      background: #f5f5f5;
-      color: #333;
-      border-color: #e5e5e5;
+      background: $gray-100;
+      color: $text-primary;
+      border-color: $border-light;
 
       &:hover:not(:disabled) {
-        background: #e5e5e5;
-        border-color: #667eea;
+        background: $border-light;
+        border-color: $primary-color;
       }
     }
   }
 }
 
-// Button group
 .ui-button-group {
   display: flex;
   gap: 0.5rem;
@@ -459,7 +439,6 @@
     }
   }
 
-  // Mobile-first responsive adjustments
   @include mobile-only {
     flex-direction: column;
     align-items: stretch;
@@ -471,7 +450,6 @@
   }
 }
 
-// Keyframe animation for loading spinner
 @keyframes ui-button-spin {
   0% {
     transform: rotate(0deg);
@@ -481,7 +459,6 @@
   }
 }
 
-// Mobile-only optimizations for very small screens
 @include mobile-only {
   .ui-button {
     padding: 0.75rem 1.25rem;

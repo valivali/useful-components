@@ -1,6 +1,9 @@
 import type { ErrorInfo, ReactNode } from "react"
 import { Component } from "react"
 
+import { Button } from "@/styles/ui/Button"
+import { TextDefault, TitleMd } from "@/styles/ui/Typography"
+
 interface Props {
   children: ReactNode
   fallback?: ReactNode
@@ -43,8 +46,8 @@ class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="error-boundary">
           <div className="error-boundary-content">
-            <h2>Something went wrong</h2>
-            <p>We're sorry, but something unexpected happened.</p>
+            <TitleMd>Something went wrong</TitleMd>
+            <TextDefault>We're sorry, but something unexpected happened.</TextDefault>
 
             {process.env.NODE_ENV === "development" && (
               <details className="error-details">
@@ -54,9 +57,9 @@ class ErrorBoundary extends Component<Props, State> {
               </details>
             )}
 
-            <button onClick={() => window.location.reload()} className="error-boundary-button">
+            <Button onClick={() => window.location.reload()} className="error-boundary-button">
               Reload Page
-            </button>
+            </Button>
           </div>
         </div>
       )

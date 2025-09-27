@@ -1,5 +1,13 @@
 import React from "react"
-import { Link } from "react-router-dom"
+
+import type { ButtonProps } from "../Button"
+import { BackButton } from "../Button"
+import { TextDefault, TitleLg, TitleMd, TitleSm } from "@/styles/ui"
+
+export type BackLinkProps = Pick<ButtonProps, "to" | "href" | "onClick" | "children"> & {
+  text?: string
+  light?: boolean
+}
 
 export interface PageHeaderProps {
   children?: React.ReactNode
@@ -8,12 +16,7 @@ export interface PageHeaderProps {
   align?: "left" | "center"
   title?: string
   subtitle?: string
-  backLink?: {
-    to?: string
-    href?: string
-    text?: string
-    light?: boolean
-  }
+  backLink?: BackLinkProps
 }
 
 export interface PageFooterProps {
@@ -48,6 +51,18 @@ export interface FlexProps {
   gap?: "small" | "default" | "large"
 }
 
+export interface PageProps {
+  children: React.ReactNode
+  className?: string
+  title?: string
+  subtitle?: string
+  backLink?: BackLinkProps
+  headerProps?: Partial<PageHeaderProps>
+  footerProps?: Partial<PageFooterProps>
+  showHeader?: boolean
+  showFooter?: boolean
+}
+
 const PageHeader: React.FC<PageHeaderProps> = ({
   children,
   className = "",
@@ -69,22 +84,15 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <header className={classes}>
       {backLink && (
-        <>
-          {backLink.to ? (
-            <Link to={backLink.to} className={`ui-page-header__back-link ${backLink.light ? "ui-page-header__back-link--light" : ""}`}>
-              {backLink.text ?? "← Back"}
-            </Link>
-          ) : backLink.href ? (
-            <a href={backLink.href} className={`ui-page-header__back-link ${backLink.light ? "ui-page-header__back-link--light" : ""}`}>
-              {backLink.text ?? "← Back"}
-            </a>
-          ) : null}
-        </>
+        <BackButton to={backLink.to} href={backLink.href} onClick={backLink.onClick}>
+          {backLink.text ?? "← Back"}
+        </BackButton>
       )}
-
-      {title && <h1 className="ui-page-header__title">{title}</h1>}
-      {subtitle && <p className="ui-page-header__subtitle">{subtitle}</p>}
-      {children}
+      <div className="ui-page-header__content">
+        {title && <TitleLg className="ui-page-header__title">{title}</TitleLg>}
+        {subtitle && <TextDefault className="ui-page-header__subtitle">{subtitle}</TextDefault>}
+        {children}
+      </div>
     </header>
   )
 }
@@ -92,10 +100,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({
 const PageFooter: React.FC<PageFooterProps> = ({ children, className = "", variant = "default", text, title }) => {
   const classes = ["ui-page-footer", variant !== "default" && `ui-page-footer--${variant}`, className].filter(Boolean).join(" ")
 
+  const footerText = text ?? "Built with React, TypeScript, and SCSS"
+
   return (
     <footer className={classes}>
-      {title && <h3 className="ui-page-footer__title">{title}</h3>}
-      {text && <p className="ui-page-footer__text">{text}</p>}
+      {title && <TitleSm className="ui-page-footer__title">{title}</TitleSm>}
+      {<TextDefault className="ui-page-footer__text">{footerText}</TextDefault>}
       {children}
     </footer>
   )
@@ -138,7 +148,28 @@ const Flex: React.FC<FlexProps> = ({ children, className = "", direction = "row"
   return <div className={classes}>{children}</div>
 }
 
-// Demo container component (commonly used in the pages)
+const Page: React.FC<PageProps> = ({
+  children,
+  className = "",
+  title,
+  subtitle,
+  backLink,
+  headerProps,
+  footerProps,
+  showHeader = true,
+  showFooter = true
+}) => {
+  const classes = ["ui-page", className].filter(Boolean).join(" ")
+
+  return (
+    <Container className={classes}>
+      {showHeader && <PageHeader title={title} subtitle={subtitle} backLink={backLink} {...headerProps} />}
+      <main className="ui-page__content">{children}</main>
+      {showFooter && <PageFooter {...footerProps} />}
+    </Container>
+  )
+}
+
 export const DemoContainer: React.FC<{
   children: React.ReactNode
   className?: string
@@ -149,14 +180,13 @@ export const DemoContainer: React.FC<{
 
   return (
     <div className={classes}>
-      {title && <h2>{title}</h2>}
-      {description && <p>{description}</p>}
+      {title && <TitleMd>{title}</TitleMd>}
+      {description && <TextDefault>{description}</TextDefault>}
       <div className="demo-container">{children}</div>
     </div>
   )
 }
 
-// Props table component (commonly used in the pages)
 export const PropsTable: React.FC<{
   props: Array<{
     name: string
@@ -171,18 +201,17 @@ export const PropsTable: React.FC<{
       {props.map((prop, index) => (
         <div key={index} className="prop-row">
           <code>{prop.name}</code>
-          <span>
+          <TextDefault>
             {prop.description}
             {prop.type && ` (${prop.type})`}
             {prop.default && ` - Default: ${prop.default}`}
-          </span>
+          </TextDefault>
         </div>
       ))}
     </div>
   )
 }
 
-// Features list component (commonly used in the pages)
 export const FeaturesList: React.FC<{
   features: string[]
   className?: string
@@ -190,10 +219,12 @@ export const FeaturesList: React.FC<{
   return (
     <ul className={`features-list ${className}`}>
       {features.map((feature, index) => (
-        <li key={index}>{feature}</li>
+        <li key={index}>
+          <TextDefault>{feature}</TextDefault>
+        </li>
       ))}
     </ul>
   )
 }
 
-export { PageHeader, PageFooter, Container, Grid, Flex }
+export { PageHeader, PageFooter, Container, Grid, Flex, Page }

@@ -1,12 +1,11 @@
 @use "../../mixins" as *;
 
-// Base card component with responsive design
 .ui-card {
-  background: white;
-  border-radius: 8px; // Mobile-first smaller radius
-  padding: 1.5rem; // Mobile-first smaller padding
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Mobile-first smaller shadow
-  border: 1px solid #e5e5e5;
+  background: $text-white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px $shadow-light;
+  border: 1px solid $border-light;
   transition: all 0.3s ease;
   position: relative;
   width: 100%;
@@ -17,45 +16,44 @@
   @include mobile-first($breakpoint-md) {
     border-radius: 10px;
     padding: 1.75rem;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 3px 5px $shadow-light;
   }
 
   @include mobile-first($breakpoint-lg) {
     border-radius: 12px;
     padding: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 4px 6px $shadow-light;
   }
 
   &:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); // Mobile-first smaller shadow
-    border-color: #667eea;
+    box-shadow: 0 4px 15px $shadow-medium;
+    border-color: $primary-color;
 
     @include mobile-first($breakpoint-md) {
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 20px $shadow-medium;
     }
 
     @include mobile-first($breakpoint-lg) {
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 25px $shadow-dark;
     }
   }
 
-  // Card variations
   &--elevated {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px $shadow-medium;
 
     &:hover {
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px $shadow-dark;
       transform: translateY(-2px);
     }
   }
 
   &--outlined {
-    border: 2px solid #e5e5e5;
+    border: 2px solid $border-light;
     box-shadow: none;
 
     &:hover {
-      border-color: #667eea;
-      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+      border-color: $primary-color;
+      box-shadow: 0 2px 8px $shadow-primary-light;
     }
   }
 
@@ -75,29 +73,28 @@
   }
 
   &--glass {
-    background: rgba(255, 255, 255, 0.15);
+    background: $overlay-medium;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
+    border: 1px solid $border-white-medium;
+    color: $text-white;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: $overlay-dark;
       border-color: rgba(255, 255, 255, 0.4);
     }
   }
 
   &--dark {
-    background: #2c3e50;
-    color: white;
-    border-color: #34495e;
+    background: $background-navy;
+    color: $text-white;
+    border-color: $background-navy-light;
 
     &:hover {
-      background: #34495e;
-      border-color: #667eea;
+      background: $background-navy-light;
+      border-color: $primary-color;
     }
   }
 
-  // Size variations
   &--small {
     padding: 1rem;
     border-radius: 6px;
@@ -128,23 +125,21 @@
     }
   }
 
-  // Coming soon state
   &--coming-soon {
     cursor: default;
     opacity: 0.6;
 
     &:hover {
       transform: none;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
-      border-color: #e5e5e5;
+      box-shadow: 0 4px 6px $shadow-light;
+      border-color: $border-light;
     }
   }
 
-  // Card header
   &__header {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid $border-light;
 
     &:last-child {
       margin-bottom: 0;
@@ -153,18 +148,16 @@
     }
   }
 
-  // Card content
   &__content {
     flex: 1;
     display: flex;
     flex-direction: column;
   }
 
-  // Card footer
   &__footer {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid $border-light;
 
     &:first-child {
       margin-top: 0;
@@ -173,18 +166,16 @@
     }
   }
 
-  // Card icon
   &__icon {
-    font-size: 2rem; // Mobile-first smaller size
+    font-size: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3rem; // Mobile-first smaller size
+    width: 3rem;
     height: 3rem;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: $gradient-pink;
     border-radius: 50%;
-    margin-bottom: 1rem; // Mobile-first smaller margin
-
+    margin-bottom: 1rem;
     @include mobile-first($breakpoint-md) {
       font-size: 2.5rem;
       width: 3.5rem;
@@ -199,30 +190,28 @@
       margin-bottom: 1.5rem;
     }
 
-    // Icon variations
     &--gradient-1 {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: $gradient-primary;
     }
 
     &--gradient-2 {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background: $gradient-pink;
     }
 
     &--gradient-3 {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      background: $gradient-blue;
     }
 
     &--gradient-4 {
-      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      background: $gradient-pastel;
     }
   }
 
-  // Card title
   &__title {
-    font-size: 1.25rem; // Mobile-first smaller size
+    font-size: 1.25rem;
     font-weight: 600;
-    margin: 0 0 0.75rem 0; // Mobile-first smaller margin
-    color: #333;
+    margin: 0 0 0.75rem 0;
+    color: $text-primary;
     line-height: 1.3;
 
     @include mobile-first($breakpoint-md) {
@@ -243,14 +232,12 @@
     }
   }
 
-  // Card description
   &__description {
-    color: #666;
+    color: $text-secondary;
     line-height: 1.5;
-    margin: 0 0 1rem 0; // Mobile-first smaller margin
+    margin: 0 0 1rem 0;
     flex: 1;
-    font-size: 0.9rem; // Mobile-first smaller size
-
+    font-size: 0.9rem;
     @include mobile-first($breakpoint-md) {
       font-size: 1rem;
       line-height: 1.6;
@@ -270,13 +257,11 @@
     }
   }
 
-  // Card tags
   &__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.375rem; // Mobile-first smaller gap
-    margin-bottom: 0.75rem; // Mobile-first smaller margin
-
+    gap: 0.375rem;
+    margin-bottom: 0.75rem;
     @include mobile-first($breakpoint-md) {
       gap: 0.5rem;
       margin-bottom: 1rem;
@@ -284,11 +269,11 @@
   }
 
   &__tag {
-    background: #f0f2f5;
+    background: $background-tertiary;
     color: #555;
-    padding: 0.2rem 0.6rem; // Mobile-first smaller padding
-    border-radius: 10px; // Mobile-first smaller radius
-    font-size: 0.75rem; // Mobile-first smaller size
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
     font-weight: 500;
 
     @include mobile-first($breakpoint-md) {
@@ -297,45 +282,43 @@
       font-size: 0.8rem;
     }
 
-    // Tag variations
     &--primary {
-      background: #667eea;
+      background: $primary-color;
       color: white;
     }
 
     &--success {
-      background: #27ae60;
+      background: $success-color;
       color: white;
     }
 
     &--warning {
-      background: #f39c12;
+      background: $warning-color;
       color: white;
     }
 
     &--danger {
-      background: #e74c3c;
+      background: $error-color;
       color: white;
     }
 
     .ui-card--dark & {
-      background: rgba(255, 255, 255, 0.1);
+      background: $overlay-light;
       color: rgba(255, 255, 255, 0.9);
     }
 
     .ui-card--glass & {
-      background: rgba(255, 255, 255, 0.2);
+      background: $overlay-dark;
       color: white;
     }
   }
 
-  // Card arrow (for interactive cards)
   &__arrow {
     position: absolute;
-    top: 1rem; // Mobile-first smaller positioning
+    top: 1rem;
     right: 1rem;
-    font-size: 1.25rem; // Mobile-first smaller size
-    color: #667eea;
+    font-size: 1.25rem;
+    color: $primary-color;
     transition: transform 0.2s ease;
 
     @include mobile-first($breakpoint-md) {
@@ -351,8 +334,7 @@
     }
 
     .ui-card:hover & {
-      transform: translateX(2px); // Mobile-first smaller transform
-
+      transform: translateX(2px);
       @include mobile-first($breakpoint-md) {
         transform: translateX(3px);
       }
@@ -376,7 +358,6 @@
   }
 }
 
-// Card link wrapper
 .ui-card-link {
   text-decoration: none;
   color: inherit;
@@ -388,13 +369,12 @@
   }
 
   &:focus {
-    outline: 2px solid #667eea;
+    outline: 2px solid $primary-color;
     outline-offset: 2px;
     border-radius: inherit;
   }
 }
 
-// Mobile-only optimizations for very small screens
 @include mobile-only {
   .ui-card {
     padding: 1.25rem;

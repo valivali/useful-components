@@ -4,7 +4,7 @@ import React, { useCallback, useMemo, useState } from "react"
 import { match } from "ts-pattern"
 
 import DragAndDropElement, { type DragItem, type DropZone } from "@/components/DragAndDropElement"
-import { Container, DemoContainer, FeaturesList, H2, H3, PageFooter, PageHeader, PropsTable } from "@/styles/ui"
+import { DemoContainer, FeaturesList, Page, PropsTable, TextDefault, TitleMd, TitleSm } from "@/styles/ui"
 
 // Task status types for the Kanban board
 interface Task extends DragItem {
@@ -127,9 +127,9 @@ const KanbanBoard: React.FC = React.memo(() => {
     <div className="kanban-board">
       {columnsData.map(columnData => (
         <div key={columnData.id} className="kanban-column">
-          <h3 className="kanban-column-title">
+          <TitleSm className="kanban-column-title">
             {columnData.label} ({columnData.tasks.length})
-          </h3>
+          </TitleSm>
           <div className="kanban-column-content">
             <DragAndDropElement
               items={columnData.tasks}
@@ -210,119 +210,114 @@ const DragAndDropPage: React.FC = () => {
   )
 
   return (
-    <Container className="drag-and-drop-page">
-      <PageHeader
-        title="DragAndDropElement Component"
-        subtitle="A powerful component for implementing HTML5 drag and drop functionality with visual feedback."
-        backLink={{ to: "/", text: "← Back to Components" }}
-      />
+    <Page
+      className="drag-and-drop-page"
+      title="DragAndDropElement Component"
+      subtitle="A powerful component for implementing HTML5 drag and drop functionality with visual feedback."
+      backLink={{ to: "/", text: "← Back to Components", children: null }}>
+      <div className="demo-section">
+        <TitleMd>Basic Drag and Drop</TitleMd>
+        <TextDefault>Drag tasks between different status columns. Notice the visual feedback when hovering over drop zones.</TextDefault>
+        <DemoContainer>
+          <DragAndDropElement
+            items={BASIC_ITEMS}
+            dropZones={BASIC_DROP_ZONES}
+            onDrop={handleBasicDrop}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            className="basic-demo"
+          />
+        </DemoContainer>
+      </div>
 
-      <main className="drag-and-drop-page__content">
-        <div className="demo-section">
-          <H2>Basic Drag and Drop</H2>
-          <p>Drag tasks between different status columns. Notice the visual feedback when hovering over drop zones.</p>
-          <DemoContainer>
-            <DragAndDropElement
-              items={BASIC_ITEMS}
-              dropZones={BASIC_DROP_ZONES}
-              onDrop={handleBasicDrop}
-              onDragStart={handleDragStart}
-              onDragEnd={handleDragEnd}
-              className="basic-demo"
-            />
-          </DemoContainer>
-        </div>
+      <div className="demo-section">
+        <TitleMd>Kanban Board - Items Move Between Columns</TitleMd>
+        <TextDefault>
+          This example shows items actually moving between columns when dropped. The state management is handled in the demo component, not
+          the hook.
+        </TextDefault>
+        <DemoContainer>
+          <KanbanBoard />
+        </DemoContainer>
+      </div>
 
-        <div className="demo-section">
-          <H2>Kanban Board - Items Move Between Columns</H2>
-          <p>
-            This example shows items actually moving between columns when dropped. The state management is handled in the demo component,
-            not the hook.
-          </p>
-          <DemoContainer>
-            <KanbanBoard />
-          </DemoContainer>
-        </div>
+      <div className="demo-section">
+        <TitleMd>Type-Restricted Drag and Drop</TitleMd>
+        <TextDefault>Items can only be dropped in compatible zones. Try dropping fruits in the vegetable box - it won't work!</TextDefault>
+        <DemoContainer>
+          <DragAndDropElement items={TYPED_ITEMS} dropZones={TYPED_DROP_ZONES} onDrop={handleTypedDrop} className="typed-demo" />
+        </DemoContainer>
+      </div>
 
-        <div className="demo-section">
-          <H2>Type-Restricted Drag and Drop</H2>
-          <p>Items can only be dropped in compatible zones. Try dropping fruits in the vegetable box - it won't work!</p>
-          <DemoContainer>
-            <DragAndDropElement items={TYPED_ITEMS} dropZones={TYPED_DROP_ZONES} onDrop={handleTypedDrop} className="typed-demo" />
-          </DemoContainer>
-        </div>
+      <div className="demo-section">
+        <TitleMd>Interactive Shopping Demo</TitleMd>
+        <TextDefault>Drag products between the store, cart, and wishlist. Items move between collections dynamically.</TextDefault>
+        <DemoContainer>
+          <div className="shopping-demo">
+            <div className="shopping-area">
+              <TitleSm>🏪 Available Products</TitleSm>
+              <DragAndDropElement
+                items={availableProducts}
+                dropZones={[SHOPPING_DROP_ZONES[2]]} // Only products zone
+                onDrop={handleShoppingDrop}
+                className="shopping-products"
+              />
+            </div>
 
-        <div className="demo-section">
-          <H2>Interactive Shopping Demo</H2>
-          <p>Drag products between the store, cart, and wishlist. Items move between collections dynamically.</p>
-          <DemoContainer>
-            <div className="shopping-demo">
-              <div className="shopping-area">
-                <H3>🏪 Available Products</H3>
-                <DragAndDropElement
-                  items={availableProducts}
-                  dropZones={[SHOPPING_DROP_ZONES[2]]} // Only products zone
-                  onDrop={handleShoppingDrop}
-                  className="shopping-products"
-                />
-              </div>
+            <div className="shopping-area">
+              <TitleSm>🛒 Shopping Cart ({cart.length} items)</TitleSm>
+              <DragAndDropElement
+                items={cartItems}
+                dropZones={[SHOPPING_DROP_ZONES[0]]} // Only cart zone
+                onDrop={handleShoppingDrop}
+                className="shopping-cart"
+              />
+            </div>
 
-              <div className="shopping-area">
-                <H3>🛒 Shopping Cart ({cart.length} items)</H3>
-                <DragAndDropElement
-                  items={cartItems}
-                  dropZones={[SHOPPING_DROP_ZONES[0]]} // Only cart zone
-                  onDrop={handleShoppingDrop}
-                  className="shopping-cart"
-                />
-              </div>
+            <div className="shopping-area">
+              <TitleSm>💝 Wishlist ({wishlist.length} items)</TitleSm>
+              <DragAndDropElement
+                items={wishlistItems}
+                dropZones={[SHOPPING_DROP_ZONES[1]]} // Only wishlist zone
+                onDrop={handleShoppingDrop}
+                className="shopping-wishlist"
+              />
+            </div>
 
-              <div className="shopping-area">
-                <H3>💝 Wishlist ({wishlist.length} items)</H3>
-                <DragAndDropElement
-                  items={wishlistItems}
-                  dropZones={[SHOPPING_DROP_ZONES[1]]} // Only wishlist zone
-                  onDrop={handleShoppingDrop}
-                  className="shopping-wishlist"
-                />
-              </div>
-
-              {/* Global drop zones for cross-area dragging */}
-              <div className="global-drop-zones">
-                <div className="drop-zone-row">
-                  {SHOPPING_DROP_ZONES.map(zone => (
-                    <div
-                      key={zone.id}
-                      className="global-drop-zone"
-                      onDragOver={e => e.preventDefault()}
-                      onDrop={e => handleGlobalDrop(e, zone.id)}>
-                      {zone.label}
-                    </div>
-                  ))}
-                </div>
+            {/* Global drop zones for cross-area dragging */}
+            <div className="global-drop-zones">
+              <div className="drop-zone-row">
+                {SHOPPING_DROP_ZONES.map(zone => (
+                  <div
+                    key={zone.id}
+                    className="global-drop-zone"
+                    onDragOver={e => e.preventDefault()}
+                    onDrop={e => handleGlobalDrop(e, zone.id)}>
+                    {zone.label}
+                  </div>
+                ))}
               </div>
             </div>
-          </DemoContainer>
-        </div>
+          </div>
+        </DemoContainer>
+      </div>
 
-        <div className="demo-section">
-          <H2>Custom Styled Elements</H2>
-          <p>Customize the appearance of draggable items and drop zones.</p>
-          <DemoContainer>
-            <DragAndDropElement
-              items={CUSTOM_ITEMS}
-              dropZones={CUSTOM_DROP_ZONES}
-              onDrop={handleCustomDrop}
-              className="custom-demo"
-              itemClassName="custom-draggable"
-              dropZoneClassName="custom-drop-zone"
-            />
-          </DemoContainer>
-        </div>
-      </main>
-
-      <PageFooter className="drag-and-drop-page__footer">
-        <H3>Props</H3>
+      <div className="demo-section">
+        <TitleMd>Custom Styled Elements</TitleMd>
+        <TextDefault>Customize the appearance of draggable items and drop zones.</TextDefault>
+        <DemoContainer>
+          <DragAndDropElement
+            items={CUSTOM_ITEMS}
+            dropZones={CUSTOM_DROP_ZONES}
+            onDrop={handleCustomDrop}
+            className="custom-demo"
+            itemClassName="custom-draggable"
+            dropZoneClassName="custom-drop-zone"
+          />
+        </DemoContainer>
+      </div>
+      <div className="drag-and-drop-page__footer">
+        <TitleSm>Props</TitleSm>
         <PropsTable
           props={[
             { name: "items", description: "Array of draggable items with id, content, and optional type" },
@@ -336,7 +331,7 @@ const DragAndDropPage: React.FC = () => {
           ]}
         />
 
-        <H3>Features</H3>
+        <TitleSm>Features</TitleSm>
         <FeaturesList
           features={[
             "✨ HTML5 drag and drop with visual feedback",
@@ -348,8 +343,8 @@ const DragAndDropPage: React.FC = () => {
             "♿ Accessible drag and drop interactions"
           ]}
         />
-      </PageFooter>
-    </Container>
+      </div>
+    </Page>
   )
 }
 

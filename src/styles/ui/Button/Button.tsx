@@ -65,17 +65,21 @@ const Button: React.FC<ButtonProps> = ({
   // If it's a link, render as Link or anchor
   if (to) {
     return (
-      <Link to={to} className={baseClasses} {...props}>
-        {content}
-      </Link>
+      <div className={baseClasses}>
+        <Link to={to} {...props}>
+          {content}
+        </Link>
+      </div>
     )
   }
 
   if (href) {
     return (
-      <a href={href} className={baseClasses} target="_blank" rel="noopener noreferrer" {...props}>
-        {content}
-      </a>
+      <div className={baseClasses}>
+        <a href={href} target="_blank" rel="noopener noreferrer" {...props}>
+          {content}
+        </a>
+      </div>
     )
   }
 
@@ -98,7 +102,7 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className = 
 // Specialized button variants
 export const BackButton: React.FC<Omit<ButtonProps, "variant" | "leftIcon">> = ({ children = "← Back", className = "", ...props }) => {
   return (
-    <Button variant="ghost" className={`ui-button--back-link ${className}`} leftIcon="←" {...props}>
+    <Button variant="outline" className={`ui-button--back-link ${className}`} leftIcon="←" {...props}>
       {children}
     </Button>
   )

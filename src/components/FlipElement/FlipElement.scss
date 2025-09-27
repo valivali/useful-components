@@ -58,7 +58,7 @@
     z-index: 1;
   }
 
-  // Horizontal flip (default)
+
   &--horizontal {
     .flip-element__back {
       transform: rotateY(180deg);
@@ -71,7 +71,7 @@
     }
   }
 
-  // Vertical flip
+
   &--vertical {
     .flip-element__back {
       transform: rotateX(180deg);
@@ -84,7 +84,7 @@
     }
   }
 
-  // Smooth hover effects (reduced for mobile)
+
   &:not(.flip-element--flipped):hover {
     .flip-element__inner {
       transform: scale(1.01); // Smaller scale on mobile
@@ -95,13 +95,13 @@
     }
   }
 
-  // Accessibility (enhanced for mobile)
+
   &:focus-visible {
     outline: 2px solid #007acc;
     outline-offset: 2px;
   }
 
-  // Touch-friendly focus for mobile
+
   &:focus {
     outline: 2px solid rgba(0, 122, 204, 0.5);
     outline-offset: 1px;
@@ -111,7 +111,7 @@
     }
   }
 
-  // Ensure proper sizing and touch targets
+
   &__front,
   &__back {
     display: flex;

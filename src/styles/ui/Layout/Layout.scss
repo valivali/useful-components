@@ -1,25 +1,23 @@
 @use "../../mixins" as *;
 
-// Page header component
 .ui-page-header {
-  text-align: center;
-  margin-bottom: 2rem; // Mobile-first smaller margin
-  padding: 1.5rem 1rem; // Mobile-first smaller padding
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  padding: 0;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
 
   @include mobile-first($breakpoint-md) {
     margin-bottom: 2.5rem;
-    padding: 1.75rem 1rem;
   }
 
   @include mobile-first($breakpoint-lg) {
     margin-bottom: 3rem;
-    padding: 2rem 1rem;
   }
 
-  // Header variants
   &--centered {
     text-align: center;
   }
@@ -29,75 +27,28 @@
   }
 
   &--glass {
-    background: rgba(0, 0, 0, 0.1);
+    background: $shadow-medium;
     backdrop-filter: blur(10px);
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid $border-white;
     color: white;
   }
 
   &--gradient {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: $gradient-primary;
     color: white;
     border-radius: 12px;
   }
 
   &--bordered {
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid $border-light;
     border-radius: 0;
     padding-bottom: 2rem;
     margin-bottom: 3rem;
   }
 
-  // Back link
-  &__back-link {
-    display: inline-flex;
-    align-items: center;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-    margin-bottom: 1rem;
-    padding: 0.5rem; // Mobile-first touch target
-    border-radius: 4px;
-    font-size: 0.9rem;
-    min-height: 44px; // Touch target
-
-    &:hover {
-      color: white;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    @include mobile-first($breakpoint-md) {
-      padding: 0;
-      font-size: 1rem;
-      min-height: auto;
-
-      &:hover {
-        background: none;
-      }
-    }
-
-    // Light variant for non-gradient headers
-    &--light {
-      color: #333;
-
-      &:hover {
-        color: #667eea;
-        background: rgba(102, 126, 234, 0.1);
-      }
-
-      @include mobile-first($breakpoint-md) {
-        &:hover {
-          background: none;
-        }
-      }
-    }
-  }
-
-  // Header title
   &__title {
-    font-size: 2rem; // Mobile-first smaller size
+    font-size: 2rem;
     font-weight: 700;
     margin: 1rem 0;
     line-height: 1.2;
@@ -115,38 +66,37 @@
     }
 
     &--gradient {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: $gradient-primary;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     &--white {
-      color: white;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      color: $text-white;
+      text-shadow: 0 1px 2px $shadow-darkest;
     }
 
     .ui-page-header--glass & {
-      color: white;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      color: $text-white;
+      text-shadow: 0 1px 2px $shadow-darkest;
     }
 
     .ui-page-header--gradient & {
-      background: linear-gradient(45deg, #fff, #f0f0f0);
+      background: $gradient-text-light;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
   }
 
-  // Header subtitle/description
   &__subtitle {
-    font-size: 1rem; // Mobile-first smaller size
-    color: #666;
-    max-width: 100%; // Mobile-first full width
+    font-size: 1rem;
+    color: $text-secondary;
+    max-width: 100%;
     margin: 0 auto;
     text-shadow: none;
-    padding: 0 0.5rem; // Mobile-first padding
+    padding: 0 0.5rem;
 
     @include mobile-first($breakpoint-md) {
       font-size: 1.1rem;
@@ -160,22 +110,21 @@
     }
 
     .ui-page-header--glass & {
-      color: rgba(255, 255, 255, 0.95);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      color: $text-light;
+      text-shadow: 0 1px 2px $shadow-darker;
     }
 
     .ui-page-header--gradient & {
-      color: rgba(255, 255, 255, 0.95);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      color: $text-light;
+      text-shadow: 0 1px 2px $shadow-darker;
     }
   }
 }
 
-// Page footer component
 .ui-page-footer {
   text-align: center;
-  padding: 1.5rem 1rem; // Mobile-first smaller padding
-  border-top: 1px solid #e5e5e5;
+  padding: 1.5rem 1rem;
+  border-top: 1px solid $border-light;
   margin-top: 2rem;
   width: 100%;
   max-width: 100%;
@@ -190,42 +139,40 @@
     margin-top: 4rem;
   }
 
-  // Footer variants
   &--dark {
-    background: #2c3e50;
-    color: white;
-    border-top-color: #34495e;
+    background: $background-navy;
+    color: $text-white;
+    border-top-color: $background-navy-light;
   }
 
   &--glass {
-    background: rgba(0, 0, 0, 0.1);
+    background: $shadow-medium;
     backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    color: rgba(255, 255, 255, 0.9);
+    border-top: 1px solid $border-white;
+    color: $text-light;
   }
 
   &__text {
     margin: 0;
-    color: #888;
-    font-size: 0.8rem; // Mobile-first smaller size
-
+    color: $text-muted;
+    font-size: 0.8rem;
     @include mobile-first($breakpoint-md) {
       font-size: 0.9rem;
     }
 
     .ui-page-footer--dark & {
-      color: rgba(255, 255, 255, 0.8);
+      color: $text-light;
     }
 
     .ui-page-footer--glass & {
-      color: rgba(255, 255, 255, 0.8);
+      color: $text-light;
     }
   }
 
   &__title {
-    font-size: 1.25rem; // Mobile-first smaller size
+    font-size: 1.25rem;
     margin-bottom: 1rem;
-    color: #333;
+    color: $text-primary;
 
     @include mobile-first($breakpoint-md) {
       font-size: 1.375rem;
@@ -236,21 +183,21 @@
     }
 
     .ui-page-footer--dark & {
-      color: white;
+      color: $text-white;
     }
 
     .ui-page-footer--glass & {
-      color: white;
+      color: $text-white;
     }
   }
 }
 
 // Container component
 .ui-container {
-  max-width: 100%; // Mobile-first full width
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  padding: 1rem; // Mobile-first smaller padding
+  padding: 1rem;
   box-sizing: border-box;
   overflow-x: hidden;
 
@@ -263,7 +210,6 @@
     padding: 2rem;
   }
 
-  // Container sizes
   &--small {
     @include mobile-first($breakpoint-lg) {
       max-width: 800px;
@@ -287,7 +233,7 @@
 
 // Demo container component
 .ui-demo-container {
-  margin-bottom: 2rem; // Mobile-first smaller margin
+  margin-bottom: 2rem;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -300,12 +246,11 @@
     margin-bottom: 3rem;
   }
 
-  // Demo container variants
   &--card {
-    background: #f8f9fa;
-    border-radius: 8px; // Mobile-first smaller radius
-    padding: 1.25rem; // Mobile-first smaller padding
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    background: $gray-50;
+    border-radius: 8px;
+    padding: 1.25rem;
+    box-shadow: 0 1px 4px $shadow-light;
 
     @include mobile-first($breakpoint-md) {
       border-radius: 10px;
@@ -319,12 +264,12 @@
   }
 
   &--glass {
-    background: rgba(255, 255, 255, 0.15);
+    background: $overlay-medium;
     backdrop-filter: blur(10px);
     border-radius: 12px;
     padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
+    border: 1px solid $border-white-medium;
+    color: $text-white;
 
     @include mobile-first($breakpoint-md) {
       padding: 1.75rem;
@@ -336,7 +281,7 @@
   }
 
   &--bordered {
-    border: 1px solid #e5e5e5;
+    border: 1px solid $border-light;
     border-radius: 8px;
     padding: 1.5rem;
 
@@ -349,7 +294,6 @@
     }
   }
 
-  // Demo container header
   &__header {
     margin-bottom: 1.5rem;
 
@@ -363,9 +307,9 @@
   }
 
   &__title {
-    font-size: 1.5rem; // Mobile-first smaller size
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: #333;
+    color: $text-primary;
     line-height: 1.3;
 
     @include mobile-first($breakpoint-md) {
@@ -377,13 +321,13 @@
     }
 
     .ui-demo-container--glass & {
-      color: white;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      color: $text-white;
+      text-shadow: 0 1px 2px $shadow-darkest;
     }
   }
 
   &__subtitle {
-    color: #666;
+    color: $text-secondary;
     margin-bottom: 1.5rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -398,12 +342,11 @@
     }
 
     .ui-demo-container--glass & {
-      color: rgba(255, 255, 255, 0.95);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      color: $text-light;
+      text-shadow: 0 1px 2px $shadow-darker;
     }
   }
 
-  // Demo container content
   &__content {
     border-radius: 8px;
     padding: 1.5rem;
@@ -418,8 +361,8 @@
 
     .ui-demo-container--card &,
     .ui-demo-container--bordered & {
-      background: white;
-      border-color: #e5e5e5;
+      background: $text-white;
+      border-color: $border-light;
     }
   }
 }
@@ -484,7 +427,6 @@
     }
   }
 
-  // Gap variations
   &--gap-small {
     gap: 0.5rem;
   }
@@ -543,13 +485,38 @@
     gap: 2rem;
   }
 
-  // Responsive flex direction
   &--mobile-column {
     flex-direction: column;
 
     @include mobile-first($breakpoint-md) {
       flex-direction: row;
     }
+  }
+}
+
+// Page component
+.ui-page {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 1rem 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  box-sizing: border-box;
+  overflow-x: hidden;
+
+  @include mobile-first($breakpoint-md) {
+    padding: 1.5rem 1rem 0;
+  }
+
+  @include mobile-first($breakpoint-lg) {
+    max-width: 1200px;
+    padding: 2rem 2rem 0;
+  }
+
+  &__content {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 

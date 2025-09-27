@@ -2,7 +2,7 @@ import "./Home.scss"
 
 import React from "react"
 
-import { Card, CardContent, CardDescription, CardIcon, CardTags, CardTitle, Container, Grid, PageFooter, PageHeader } from "@/styles/ui"
+import { Card, CardContent, CardDescription, CardIcon, CardTags, CardTitle, Grid, Page } from "@/styles/ui"
 
 interface ComponentInfo {
   id: string
@@ -42,22 +42,16 @@ const components: ComponentInfo[] = [
 
 const HomePage: React.FC = () => {
   return (
-    <Container className="home-page">
-      <PageHeader
-        title="Useful Components Library"
-        subtitle="A collection of reusable React components with beautiful animations and interactions."
-      />
-
-      <main className="home-page__content">
-        <Grid columns="auto-fit" className="components-grid">
-          {components.map(component => (
-            <ComponentCard key={component.id} component={component} />
-          ))}
-        </Grid>
-      </main>
-
-      <PageFooter text="Built with React, TypeScript, and SCSS" />
-    </Container>
+    <Page
+      className="home-page"
+      title="Useful Components Library"
+      subtitle="A collection of reusable React components with beautiful animations and interactions.">
+      <Grid columns="auto-fit" className="components-grid">
+        {components.map(component => (
+          <ComponentCard key={component.id} component={component} />
+        ))}
+      </Grid>
+    </Page>
   )
 }
 

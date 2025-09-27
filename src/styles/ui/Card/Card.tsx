@@ -1,6 +1,8 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
+import { TextDefault, TitleSm } from "@/styles/ui"
+
 export interface CardProps {
   children: React.ReactNode
   className?: string
@@ -37,7 +39,6 @@ export interface CardFooterProps {
 export interface CardTitleProps {
   children: React.ReactNode
   className?: string
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 }
 
 export interface CardDescriptionProps {
@@ -81,7 +82,6 @@ const Card: React.FC<CardProps> = ({
     </div>
   )
 
-  // If it's a link, wrap with appropriate link component
   if (to && !comingSoon) {
     return (
       <Link to={to} className="ui-card-link">
@@ -122,14 +122,14 @@ export const CardFooter: React.FC<CardFooterProps> = ({ children, className = ""
   return <div className={classes}>{children}</div>
 }
 
-export const CardTitle: React.FC<CardTitleProps> = ({ children, className = "", as: Component = "h3" }) => {
+export const CardTitle: React.FC<CardTitleProps> = ({ children, className = "" }) => {
   const classes = ["ui-card__title", className].filter(Boolean).join(" ")
-  return <Component className={classes}>{children}</Component>
+  return <TitleSm className={classes}>{children}</TitleSm>
 }
 
 export const CardDescription: React.FC<CardDescriptionProps> = ({ children, className = "" }) => {
   const classes = ["ui-card__description", className].filter(Boolean).join(" ")
-  return <p className={classes}>{children}</p>
+  return <TextDefault className={classes}>{children}</TextDefault>
 }
 
 export const CardTags: React.FC<CardTagsProps> = ({ tags, className = "", variant = "default" }) => {
@@ -139,7 +139,7 @@ export const CardTags: React.FC<CardTagsProps> = ({ tags, className = "", varian
     <div className={containerClasses}>
       {tags.map((tag, index) => (
         <span key={index} className={`ui-card__tag ${variant !== "default" ? `ui-card__tag--${variant}` : ""}`}>
-          {tag}
+          <TextDefault>{tag}</TextDefault>
         </span>
       ))}
     </div>
