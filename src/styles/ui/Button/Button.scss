@@ -1,480 +1,202 @@
 @use "../../mixins" as *;
 
-.ui-button {
+.btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
   font-family: inherit;
-  line-height: 1;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-decoration: none;
-  min-height: 44px;
-  min-width: 120px;
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
 
-  &:focus {
-    outline: 2px solid transparent;
-    box-shadow: 0 0 0 2px $shadow-primary-darker;
+  .btn__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
   }
 
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-    pointer-events: none;
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
   }
 
-  @include mobile-first($breakpoint-md) {
-    padding: 0.75rem 1.5rem;
+  &--sm {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    min-height: 2rem;
+
+    @media (min-width: 768px) {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  &--md {
+    padding: 0.75rem 1rem;
     font-size: 1rem;
-    min-height: auto;
-    min-width: 140px;
+    min-height: 2.5rem;
+
+    @media (min-width: 768px) {
+      padding: 0.75rem 1.25rem;
+    }
   }
 
-  @include mobile-first($breakpoint-lg) {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    min-width: 160px;
-    border-radius: 8px;
+  &--lg {
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    min-height: 3rem;
+
+    @media (min-width: 768px) {
+      padding: 1rem 2rem;
+    }
   }
 
   &--primary {
-    background: $primary-color;
+    background-color: $primary-color;
     color: $text-white;
+    border-color: $primary-color;
 
-    &:hover:not(:disabled) {
-      background: $primary-hover;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px $shadow-primary-dark;
+    &:hover:not(.btn--disabled) {
+      background-color: $primary-hover;
+      border-color: $primary-hover;
     }
 
-    &:active:not(:disabled) {
-      transform: translateY(0);
-      box-shadow: 0 2px 6px $shadow-primary-dark;
+    &:active:not(.btn--disabled) {
+      background-color: $primary-dark;
+      border-color: $primary-dark;
     }
   }
 
   &--secondary {
-    background: $gray-50;
+    background-color: $gray-50;
     color: $text-primary;
-    border: 1px solid $border-light;
+    border-color: $border-light;
 
-    &:hover:not(:disabled) {
-      background: $gray-200;
-      border-color: $primary-color;
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px $shadow-medium;
-    }
-
-    &:active:not(:disabled) {
-      transform: translateY(0);
-      background: $gray-300;
-    }
-  }
-
-  &--success {
-    background: $success-color;
-    color: $text-white;
-
-    &:hover:not(:disabled) {
-      background: $success-hover;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px $shadow-success;
-    }
-
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
-  }
-
-  &--warning {
-    background: $warning-color;
-    color: $text-white;
-
-    &:hover:not(:disabled) {
-      background: $warning-hover;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px $shadow-warning;
-    }
-
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
-  }
-
-  &--danger {
-    background: $error-color;
-    color: $text-white;
-
-    &:hover:not(:disabled) {
-      background: $error-hover;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px $shadow-error;
-    }
-
-    &:active:not(:disabled) {
-      transform: translateY(0);
+    &:hover:not(.btn--disabled) {
+      background-color: $gray-200;
+      border-color: $border-medium;
     }
   }
 
   &--outline {
-    background: transparent;
-    border: 2px solid $primary-color;
+    background-color: transparent;
     color: $primary-color;
+    border-color: $primary-color;
 
-    &:hover:not(:disabled) {
-      background: $primary-color;
-      color: $text-white;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px $shadow-primary-medium;
-    }
+    &:hover:not(.btn--disabled) {
+      background-color: $shadow-primary-light;
+      color: $primary-hover;
+      border-color: $primary-hover;
 
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
-
-    &.ui-button--success {
-      border-color: $success-color;
-      color: $success-color;
-
-      &:hover:not(:disabled) {
-        background: $success-color;
-        color: $text-white;
-      }
-    }
-
-    &.ui-button--warning {
-      border-color: $warning-color;
-      color: $warning-color;
-
-      &:hover:not(:disabled) {
-        background: $warning-color;
-        color: $text-white;
-      }
-    }
-
-    &.ui-button--danger {
-      border-color: $error-color;
-      color: $error-color;
-
-      &:hover:not(:disabled) {
-        background: $error-color;
-        color: $text-white;
+      @media (prefers-color-scheme: light) {
+        background-color: $shadow-primary-light;
       }
     }
   }
 
   &--ghost {
-    background: transparent;
-    color: $primary-color;
-    border: 1px solid transparent;
+    background-color: transparent;
+    color: $text-primary;
+    border-color: transparent;
 
-    &:hover:not(:disabled) {
-      background: $shadow-primary-light;
-      border-color: $shadow-primary-medium;
-      transform: translateY(-1px);
-    }
-
-    &:active:not(:disabled) {
-      transform: translateY(0);
-      background: $shadow-primary-medium;
+    &:hover:not(.btn--disabled) {
+      background-color: $gray-100;
+      color: $text-primary;
     }
   }
 
-  &--gradient {
-    background: $gradient-primary;
+  &--destructive {
+    background-color: $error-color;
     color: $text-white;
-    border: none;
+    border-color: $error-color;
 
-    &:hover:not(:disabled) {
-      background: $gradient-primary-hover;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px $shadow-primary-darker;
+    &:hover:not(.btn--disabled) {
+      background-color: $error-hover;
+      border-color: $error-hover;
     }
 
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
-
-    &.ui-button--gradient-2 {
-      background: $gradient-pink;
-
-      &:hover:not(:disabled) {
-        background: $gradient-pink-hover;
-      }
-    }
-
-    &.ui-button--gradient-3 {
-      background: $gradient-blue;
-
-      &:hover:not(:disabled) {
-        background: $gradient-blue-hover;
-      }
+    &:active:not(.btn--disabled) {
+      background-color: #a93226;
+      border-color: #a93226;
     }
   }
 
-  &--small {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    min-height: 36px;
-    min-width: 100px;
-    border-radius: 4px;
-
-    @include mobile-first($breakpoint-md) {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      min-height: auto;
-      min-width: 110px;
-    }
-
-    @include mobile-first($breakpoint-lg) {
-      padding: 0.625rem 1.25rem;
-      font-size: 0.9rem;
-      min-width: 120px;
-      border-radius: 6px;
-    }
-  }
-
-  &--large {
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    min-height: 52px;
-    min-width: 160px;
-    border-radius: 8px;
-
-    @include mobile-first($breakpoint-md) {
-      padding: 1.125rem 2.25rem;
-      font-size: 1.125rem;
-      min-height: auto;
-      min-width: 180px;
-    }
-
-    @include mobile-first($breakpoint-lg) {
-      padding: 1.25rem 2.5rem;
-      font-size: 1.2rem;
-      min-width: 200px;
-      border-radius: 10px;
-    }
-  }
-
-  &--full-width {
-    width: 100%;
-    min-width: 100%;
-  }
-
-  &--icon-only {
-    min-width: 44px;
-    width: 44px;
-    padding: 0;
-    border-radius: 50%;
-
-    @include mobile-first($breakpoint-md) {
-      min-width: 40px;
-      width: 40px;
-      border-radius: 50%;
-    }
-
-    @include mobile-first($breakpoint-lg) {
-      min-width: 48px;
-      width: 48px;
-    }
-
-    &.ui-button--small {
-      min-width: 36px;
-      width: 36px;
-
-      @include mobile-first($breakpoint-md) {
-        min-width: 32px;
-        width: 32px;
-      }
-
-      @include mobile-first($breakpoint-lg) {
-        min-width: 36px;
-        width: 36px;
-      }
-    }
-
-    &.ui-button--large {
-      min-width: 56px;
-      width: 56px;
-
-      @include mobile-first($breakpoint-md) {
-        min-width: 52px;
-        width: 52px;
-      }
-
-      @include mobile-first($breakpoint-lg) {
-        min-width: 60px;
-        width: 60px;
-      }
-    }
+  /* Button States */
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   &--loading {
-    color: transparent;
+    cursor: not-allowed;
     pointer-events: none;
 
-    &::after {
-      content: "";
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      border: 2px solid transparent;
-      border-top: 2px solid currentColor;
-      border-radius: 50%;
-      animation: ui-button-spin 1s linear infinite;
-      color: inherit;
-    }
-
-    &.ui-button--primary::after,
-    &.ui-button--success::after,
-    &.ui-button--warning::after,
-    &.ui-button--danger::after,
-    &.ui-button--gradient::after {
-      border-top-color: white;
-    }
-
-    &.ui-button--secondary::after,
-    &.ui-button--ghost::after {
-      border-top-color: $primary-color;
-    }
-
-    &.ui-button--outline::after {
-      border-top-color: currentColor;
+    .btn__content {
+      opacity: 0.7;
     }
   }
 
+  /* Button Icons */
   &__icon {
-    font-size: 1em;
-    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 
     &--left {
-      margin-right: 0.5rem;
-      margin-left: -0.25rem;
+      margin-right: 0.25rem;
     }
 
     &--right {
-      margin-left: 0.5rem;
-      margin-right: -0.25rem;
+      margin-left: 0.25rem;
     }
   }
 
-  &--back-link {
-    &:active:not(:disabled) {
-      transform: translateY(0);
-    }
-
-    &.ui-button--back-link-light {
-      background: $gray-100;
-      color: $text-primary;
-      border-color: $border-light;
-
-      &:hover:not(:disabled) {
-        background: $border-light;
-        border-color: $primary-color;
-      }
-    }
+  /* Loading Spinner */
+  &__spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: btn-spin 1s linear infinite;
   }
 }
 
-.ui-button-group {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-
-  &--attached {
-    gap: 0;
-
-    .ui-button {
-      border-radius: 0;
-      border-right-width: 0;
-
-      &:first-child {
-        border-top-left-radius: 6px;
-        border-bottom-left-radius: 6px;
-      }
-
-      &:last-child {
-        border-top-right-radius: 6px;
-        border-bottom-right-radius: 6px;
-        border-right-width: 1px;
-      }
-
-      &:not(:last-child):not(:first-child) {
-        border-radius: 0;
-      }
-    }
-  }
-
-  &--vertical {
-    flex-direction: column;
-    align-items: stretch;
-
-    &.ui-button-group--attached {
-      .ui-button {
-        border-radius: 0;
-        border-bottom-width: 0;
-
-        &:first-child {
-          border-top-left-radius: 6px;
-          border-top-right-radius: 6px;
-          border-bottom-left-radius: 0;
-        }
-
-        &:last-child {
-          border-bottom-left-radius: 6px;
-          border-bottom-right-radius: 6px;
-          border-top-right-radius: 0;
-          border-bottom-width: 1px;
-        }
-      }
-    }
-  }
-
-  @include mobile-only {
-    flex-direction: column;
-    align-items: stretch;
-
-    &:not(.ui-button-group--vertical) .ui-button {
-      width: 100%;
-      min-width: 100%;
-    }
-  }
-}
-
-@keyframes ui-button-spin {
+@keyframes btn-spin {
   0% {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
-@include mobile-only {
-  .ui-button {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.85rem;
-    min-width: 110px;
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .btn {
+    min-height: 44px; /* iOS accessibility guidelines */
 
-    &--small {
-      padding: 0.5rem 0.875rem;
-      font-size: 0.75rem;
-      min-width: 90px;
+    &--sm {
+      min-height: 40px;
     }
 
-    &--large {
-      padding: 1rem 1.75rem;
-      font-size: 0.95rem;
-      min-width: 140px;
+    &--lg {
+      min-height: 48px;
     }
   }
 }

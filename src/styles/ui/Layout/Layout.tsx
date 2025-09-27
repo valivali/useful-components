@@ -1,12 +1,46 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
-import type { ButtonProps } from "../Button"
-import { BackButton } from "../Button"
 import { TextDefault, TitleLg, TitleMd, TitleSm } from "@/styles/ui"
 
-export type BackLinkProps = Pick<ButtonProps, "to" | "href" | "onClick" | "children"> & {
+import { Button } from "../Button"
+
+export type BackLinkProps = {
+  to?: string
+  href?: string
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  children?: React.ReactNode
   text?: string
   light?: boolean
+}
+
+// Simple BackButton component using the new Button
+const BackButton: React.FC<BackLinkProps> = ({ to, href, onClick, children, text = "← Back" }) => {
+  if (to) {
+    return (
+      <Link to={to} style={{ textDecoration: "none" }}>
+        <Button variant="outline" leftIcon="←">
+          {children ?? text}
+        </Button>
+      </Link>
+    )
+  }
+
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+        <Button variant="outline" leftIcon="←">
+          {children ?? text}
+        </Button>
+      </a>
+    )
+  }
+
+  return (
+    <Button variant="outline" leftIcon="←" onClick={onClick}>
+      {children ?? text}
+    </Button>
+  )
 }
 
 export interface PageHeaderProps {
