@@ -1,12 +1,22 @@
 import "./Flip.scss"
 
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 
 import FlipElement from "@/components/FlipElement"
-import { Button, DemoContainer, Page, PropsTable, TextDefault, TitleMd, TitleSm } from "@/styles/ui"
+import { Button, DemoSection, Page, PropsTable, TextDefault, TitleSm } from "@/styles/ui"
+
+import { demoConfigs } from "./data/demoConfigs"
 
 const FlipPage: React.FC = () => {
   const [controlledFlip, setControlledFlip] = useState(false)
+
+  const handleControlledFlipToggle = useCallback(() => {
+    setControlledFlip(prev => !prev)
+  }, [])
+
+  const handleFlipChange = useCallback((flipped: boolean) => {
+    console.log("Flip state changed:", flipped)
+  }, [])
 
   return (
     <Page
@@ -14,143 +24,50 @@ const FlipPage: React.FC = () => {
       title="FlipElement Component"
       subtitle="A versatile component for creating smooth flip animations with various trigger actions."
       backLink={{ to: "/", text: "Back to Components", children: null }}>
-      <div className="demo-section">
-        <TitleMd>Click to Flip (Horizontal)</TitleMd>
-        <TextDefault>Click on the card to see it flip horizontally.</TextDefault>
-        <DemoContainer>
-          <FlipElement
-            action="click"
-            flipDirection="horizontal"
-            flipDuration={600}
-            className="demo-card"
-            flipTo={
-              <div className="card-back">
-                <TitleSm>🎉</TitleSm>
-                <TextDefault>You found the ace!</TextDefault>
-              </div>
-            }>
-            <div className="card-front">
-              <TitleSm>🂠</TitleSm>
-              <TextDefault>Playing Card</TextDefault>
-            </div>
-          </FlipElement>
-        </DemoContainer>
-      </div>
-
-      <div className="demo-section">
-        <TitleMd>Hover to Flip (Vertical)</TitleMd>
-        <TextDefault>Hover over the element to see it flip vertically.</TextDefault>
-        <DemoContainer>
-          <FlipElement
-            action="hover"
-            flipDirection="vertical"
-            flipDuration={400}
-            className="demo-card demo-card--hover"
-            flipTo={
-              <div className="card-back card-back--info">
-                <TitleSm>ℹ️</TitleSm>
-                <TextDefault>More information appears on hover!</TextDefault>
-              </div>
-            }>
-            <div className="card-front card-front--info">
-              <TitleSm>📋</TitleSm>
-              <TextDefault>Hover for details</TextDefault>
-            </div>
-          </FlipElement>
-        </DemoContainer>
-      </div>
-
-      <div className="demo-section">
-        <TitleMd>Controlled Flip</TitleMd>
-        <TextDefault>Control the flip state programmatically with a button.</TextDefault>
-        <DemoContainer>
-          <div className="controlled-demo">
-            <Button className="control-button" onClick={() => setControlledFlip(!controlledFlip)}>
-              {controlledFlip ? "Show Front" : "Show Back"}
-            </Button>
+      {demoConfigs.map(config => (
+        <DemoSection key={config.id} title={config.title} description={config.description} containerClassName={config.containerClassName}>
+          {config.demos.map((demo, index) => (
             <FlipElement
-              action="function"
-              flipDirection="horizontal"
-              flipDuration={500}
-              isFlipped={controlledFlip}
-              className="demo-card"
-              onFlipChange={flipped => console.log("Flip state changed:", flipped)}
-              flipTo={
-                <div className="card-back card-back--controlled">
-                  <TitleSm>🎛️</TitleSm>
-                  <TextDefault>Controlled by button</TextDefault>
-                </div>
-              }>
-              <div className="card-front card-front--controlled">
-                <TitleSm>🎮</TitleSm>
-                <TextDefault>Click button to flip</TextDefault>
-              </div>
+              key={`${config.id}-${index}`}
+              action={demo.action}
+              flipDirection={demo.flipDirection}
+              flipDuration={demo.flipDuration}
+              flipRotation={demo.flipRotation}
+              className={demo.className}
+              flipTo={demo.flipTo}>
+              {demo.children}
             </FlipElement>
-          </div>
-        </DemoContainer>
-      </div>
+          ))}
+        </DemoSection>
+      ))}
 
-      <div className="demo-section">
-        <TitleMd>Fast Flip Animation</TitleMd>
-        <TextDefault>A quick flip animation with custom duration.</TextDefault>
-        <DemoContainer>
+      {/* Controlled flip demo (special case) */}
+      <DemoSection title="Controlled Flip" description="Control the flip state programmatically with a button.">
+        <div className="controlled-demo">
+          <Button className="control-button" onClick={handleControlledFlipToggle}>
+            {controlledFlip ? "Show Front" : "Show Back"}
+          </Button>
           <FlipElement
-            action="click"
+            action="function"
             flipDirection="horizontal"
-            flipDuration={200}
-            className="demo-card demo-card--fast"
+            flipDuration={500}
+            isFlipped={controlledFlip}
+            className="demo-card"
+            onFlipChange={handleFlipChange}
             flipTo={
-              <div className="card-back">
-                <TitleSm>⚡</TitleSm>
-                <TextDefault>Lightning fast!</TextDefault>
+              <div className="card-back card-back--controlled">
+                <TitleSm>🎛️</TitleSm>
+                <TextDefault>Controlled by button</TextDefault>
               </div>
             }>
-            <div className="card-front">
-              <TitleSm>🏃</TitleSm>
-              <TextDefault>Quick Flip</TextDefault>
+            <div className="card-front card-front--controlled">
+              <TitleSm>🎮</TitleSm>
+              <TextDefault>Click button to flip</TextDefault>
             </div>
           </FlipElement>
-        </DemoContainer>
-      </div>
+        </div>
+      </DemoSection>
 
-      <div className="demo-section">
-        <TitleMd>Different Sizes</TitleMd>
-        <TextDefault>FlipElement adapts to different container sizes.</TextDefault>
-        <DemoContainer className="demo-container--sizes">
-          <FlipElement
-            action="click"
-            className="demo-card demo-card--small"
-            flipTo={
-              <div className="card-back">
-                <TextDefault>Small</TextDefault>
-              </div>
-            }>
-            <div className="card-front">📱</div>
-          </FlipElement>
-
-          <FlipElement
-            action="click"
-            className="demo-card demo-card--medium"
-            flipTo={
-              <div className="card-back">
-                <TextDefault>Medium</TextDefault>
-              </div>
-            }>
-            <div className="card-front">💻</div>
-          </FlipElement>
-
-          <FlipElement
-            action="click"
-            className="demo-card demo-card--large"
-            flipTo={
-              <div className="card-back">
-                <TextDefault>Large</TextDefault>
-              </div>
-            }>
-            <div className="card-front">🖥️</div>
-          </FlipElement>
-        </DemoContainer>
-      </div>
       <div className="flip-element-page__footer">
         <TitleSm>Props</TitleSm>
         <PropsTable
@@ -160,6 +77,7 @@ const FlipPage: React.FC = () => {
             { name: "action", description: "'click' | 'hover' | 'function'", default: "click" },
             { name: "flipDirection", description: "'horizontal' | 'vertical'", default: "horizontal" },
             { name: "flipDuration", description: "Animation duration in ms", default: "600" },
+            { name: "flipRotation", description: "Rotation degrees for flip animation", default: "180" },
             { name: "isFlipped", description: "Controlled flip state (for action: 'function')" },
             { name: "onFlipChange", description: "Callback when flip state changes" }
           ]}

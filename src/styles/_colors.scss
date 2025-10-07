@@ -1,8 +1,6 @@
 // =============================================================================
 // COLOR SYSTEM
 // =============================================================================
-// Centralized color variables for the entire application
-// Use these variables instead of hardcoded colors in your SCSS files
 
 // =============================================================================
 // BRAND COLORS
@@ -160,3 +158,154 @@ $light-border: #e5e5e5;
 $dark-bg: #242424;
 $dark-text: rgba(255, 255, 255, 0.87);
 $dark-border: rgba(255, 255, 255, 0.2);
+
+// =============================================================================
+// CSS CUSTOM PROPERTIES FOR THEMING
+// =============================================================================
+// Define CSS custom properties for runtime theming
+// These can be overridden dynamically with JavaScript or CSS
+
+:root {
+  // Brand colors - themeable
+  --brand-blue: #{$primary-color};
+  --brand-blue-hover: #{$primary-hover};
+  --brand-blue-light: #{$primary-light};
+  --brand-blue-dark: #{$primary-dark};
+
+  // Semantic colors - themeable
+  --success-green: #{$success-color};
+  --success-green-hover: #{$success-hover};
+  --warning-orange: #{$warning-color};
+  --warning-orange-hover: #{$warning-hover};
+  --danger-red: #{$error-color};
+  --danger-red-hover: #{$error-hover};
+  --info-blue: #{$info-color};
+
+  // Text colors - themeable
+  --text-heading: #{$text-primary};
+  --text-body: #{$text-secondary};
+  --text-subtle: #{$text-muted};
+  --text-on-dark: #{$text-white};
+  --text-on-light: #{$text-light};
+  --text-inverse: #{$text-dark};
+
+  // Background colors - themeable
+  --surface-page: #{$background-primary};
+  --surface-card: #{$background-secondary};
+  --surface-elevated: #{$background-tertiary};
+  --surface-dark: #{$background-dark};
+  --surface-darker: #{$background-darker};
+
+  // Border colors - themeable
+  --border-subtle: #{$border-light};
+  --border-default: #{$border-medium};
+  --border-strong: #{$border-dark};
+
+  // Neutral colors - themeable
+  --neutral-50: #{$gray-50};
+  --neutral-100: #{$gray-100};
+  --neutral-200: #{$gray-200};
+  --neutral-300: #{$gray-300};
+  --neutral-400: #{$gray-400};
+  --neutral-500: #{$gray-500};
+  --neutral-600: #{$gray-600};
+  --neutral-700: #{$gray-700};
+  --neutral-800: #{$gray-800};
+  --neutral-900: #{$gray-900};
+
+  // Shadow colors - themeable
+  --shadow-subtle: #{$shadow-light};
+  --shadow-default: #{$shadow-medium};
+  --shadow-strong: #{$shadow-dark};
+  --shadow-stronger: #{$shadow-darker};
+  --shadow-strongest: #{$shadow-darkest};
+  --shadow-brand-subtle: #{$shadow-primary-light};
+  --shadow-brand-default: #{$shadow-primary-medium};
+  --shadow-brand-strong: #{$shadow-primary-dark};
+
+  // Component spacing - themeable
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  // Border radius - themeable
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 50%;
+
+  // Typography - themeable
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+
+  // Transitions - themeable
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  // Z-index scale
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+}
+
+// Dark theme overrides
+[data-theme="dark"] {
+  --text-heading: #{$dark-text};
+  --text-body: rgba(255, 255, 255, 0.7);
+  --text-subtle: rgba(255, 255, 255, 0.5);
+
+  --surface-page: #{$dark-bg};
+  --surface-card: #2d2d2d;
+  --surface-elevated: #3a3a3a;
+
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-default: rgba(255, 255, 255, 0.2);
+  --border-strong: rgba(255, 255, 255, 0.3);
+
+  --neutral-50: #3a3a3a;
+  --neutral-100: #404040;
+  --neutral-200: #4a4a4a;
+  --neutral-300: #555555;
+  --neutral-400: #666666;
+  --neutral-500: #777777;
+  --neutral-600: #888888;
+  --neutral-700: #999999;
+  --neutral-800: #aaaaaa;
+  --neutral-900: #bbbbbb;
+}
+
+// High contrast theme
+[data-theme="high-contrast"] {
+  --brand-blue: #0066cc;
+  --brand-blue-hover: #0052a3;
+  --text-heading: #000000;
+  --text-body: #333333;
+  --surface-page: #ffffff;
+  --border-subtle: #000000;
+  --border-default: #333333;
+}

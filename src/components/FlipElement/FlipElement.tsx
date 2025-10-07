@@ -1,6 +1,9 @@
 import "./FlipElement.scss"
 
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { memo, useMemo } from "react"
+
+import { useFlipActionHandlers } from "@/hooks/useFlipActionHandlers"
+import { type FlipAction, useFlipElement } from "@/hooks/useFlipElement"
 
 export interface FlipElementProps {
   /**
@@ -17,7 +20,7 @@ export interface FlipElementProps {
    * The action that triggers the flip
    * @default 'click'
    */
-  action?: "click" | "hover" | "function"
+  action?: FlipAction
 
   /**
    * The direction of the flip animation
@@ -30,6 +33,12 @@ export interface FlipElementProps {
    * @default 600
    */
   flipDuration?: number
+
+  /**
+   * Rotation degrees for the flip animation
+   * @default 180
+   */
+  flipRotation?: number
 
   /**
    * Whether the element is initially flipped
@@ -56,97 +65,117 @@ export interface FlipElementProps {
    * Additional styles for the container
    */
   style?: React.CSSProperties
+
+  /**
+   * ARIA label for accessibility
+   */
+  "aria-label"?: string
+
+  /**
+   * ARIA description for accessibility
+   */
+  "aria-describedby"?: string
+
+  /**
+   * Whether the element should be focusable
+   * @default true for click actions, false for hover actions
+   */
+  focusable?: boolean
 }
 
-export const FlipElement: React.FC<FlipElementProps> = ({
-  children,
-  flipTo,
-  action = "click",
-  flipDirection = "horizontal",
-  flipDuration = 600,
-  initialFlipped = false,
-  isFlipped: controlledFlipped,
-  onFlipChange,
-  className = "",
-  style = {}
-}) => {
-  const [internalFlipped, setInternalFlipped] = useState(initialFlipped)
-  const containerRef = useRef<HTMLDivElement>(null)
+export const FlipElement: React.FC<FlipElementProps> = memo(
+  ({
+    children,
+    flipTo,
+    action = "click",
+    flipDirection = "horizontal",
+    flipDuration = 600,
+    flipRotation = 180,
+    initialFlipped = false,
+    isFlipped: controlledFlipped,
+    onFlipChange,
+    className = "",
+    style = {},
+    "aria-label": ariaLabel,
+    "aria-describedby": ariaDescribedBy,
+    focusable = action === "click"
+  }) => {
+    const { flipped, handleToggle, handleFlip, handleUnflip } = useFlipElement({
+      initialFlipped,
+      isFlipped: controlledFlipped,
+      onFlipChange,
+      action
+    })
 
-  // Determine if we're using controlled or uncontrolled state
-  const isControlled = controlledFlipped !== undefined
-  const flipped = isControlled ? controlledFlipped : internalFlipped
+    const { containerRef } = useFlipActionHandlers({
+      action,
+      onToggle: handleToggle,
+      onFlip: handleFlip,
+      onUnflip: handleUnflip
+    })
 
-  const handleFlip = useCallback(() => {
-    if (action !== "function") {
-      const newFlipped = !flipped
-      if (!isControlled) {
-        setInternalFlipped(newFlipped)
-      }
-      onFlipChange?.(newFlipped)
-    }
-  }, [action, flipped, isControlled, onFlipChange])
+    const numFlips = useMemo(() => Math.round(flipRotation / 180), [flipRotation])
+    const isMultiFlip = numFlips > 1
 
-  // Set up event listeners based on action type
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container || action === "function") return
+    const containerClasses = useMemo(
+      () =>
+        [
+          "flip-element",
+          `flip-element--${flipDirection}`,
+          flipped ? "flip-element--flipped" : "",
+          action === "click" ? "flip-element--clickable" : "",
+          isMultiFlip ? `flip-element--multi-flip flip-element--flips-${numFlips}` : "",
+          className
+        ]
+          .filter(Boolean)
+          .join(" "),
+      [flipDirection, flipped, action, isMultiFlip, numFlips, className]
+    )
 
-    if (action === "click") {
-      container.addEventListener("click", handleFlip)
-      return () => container.removeEventListener("click", handleFlip)
-    }
+    const containerStyle = useMemo(
+      () =>
+        ({
+          ...style,
+          "--flip-duration": `${flipDuration}ms`,
+          "--flip-rotation": `${flipRotation}deg`,
+          "--num-flips": numFlips.toString()
+        }) as React.CSSProperties & {
+          "--flip-duration": string
+          "--flip-rotation": string
+          "--num-flips": string
+        },
+      [style, flipDuration, flipRotation, numFlips]
+    )
 
-    if (action === "hover") {
-      const handleMouseEnter = () => {
-        const newFlipped = true
-        if (!isControlled) {
-          setInternalFlipped(newFlipped)
-        }
-        onFlipChange?.(newFlipped)
-      }
+    const accessibilityProps = useMemo(
+      () => ({
+        role: action === "click" ? "button" : undefined,
+        tabIndex: focusable && action === "click" ? 0 : -1,
+        "aria-label": ariaLabel ?? (action === "click" ? "Flip element" : undefined),
+        "aria-describedby": ariaDescribedBy,
+        "aria-pressed": action === "click" ? flipped : undefined,
+        onKeyDown:
+          action === "click" && focusable
+            ? (e: React.KeyboardEvent) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault()
+                  handleToggle()
+                }
+              }
+            : undefined
+      }),
+      [action, focusable, ariaLabel, ariaDescribedBy, flipped, handleToggle]
+    )
 
-      const handleMouseLeave = () => {
-        const newFlipped = false
-        if (!isControlled) {
-          setInternalFlipped(newFlipped)
-        }
-        onFlipChange?.(newFlipped)
-      }
-
-      container.addEventListener("mouseenter", handleMouseEnter)
-      container.addEventListener("mouseleave", handleMouseLeave)
-
-      return () => {
-        container.removeEventListener("mouseenter", handleMouseEnter)
-        container.removeEventListener("mouseleave", handleMouseLeave)
-      }
-    }
-  }, [action, isControlled, flipped, onFlipChange, handleFlip])
-
-  const containerClasses = [
-    "flip-element",
-    `flip-element--${flipDirection}`,
-    flipped ? "flip-element--flipped" : "",
-    action === "click" ? "flip-element--clickable" : "",
-    className
-  ]
-    .filter(Boolean)
-    .join(" ")
-
-  const containerStyle = {
-    ...style,
-    "--flip-duration": `${flipDuration}ms`
-  } as React.CSSProperties & { "--flip-duration": string }
-
-  return (
-    <div ref={containerRef} className={containerClasses} style={containerStyle}>
-      <div className="flip-element__inner">
-        <div className="flip-element__front">{children}</div>
-        <div className="flip-element__back">{flipTo}</div>
+    return (
+      <div ref={containerRef} className={containerClasses} style={containerStyle} {...accessibilityProps}>
+        <div className="flip-element__inner">
+          <div className="flip-element__front">{children}</div>
+          <div className="flip-element__back">{flipTo}</div>
+        </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+)
 
 export default FlipElement

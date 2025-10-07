@@ -1,7 +1,8 @@
 @use "../../styles/mixins" as *;
+@use "../../styles/colors" as *;
 
 .flip-element-page {
-  &__content {
+  .ui-page__content {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -16,129 +17,12 @@
   }
 }
 
-.demo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5rem;
-  background: $background-secondary;
-  border-radius: 6px;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-
-  &--sizes {
-    gap: 1rem;
-    flex-wrap: wrap;
-    flex-direction: column;
-
-    @include mobile-first($breakpoint-md) {
-      flex-direction: row;
-      gap: 1.5rem;
-    }
-
-    @include mobile-first($breakpoint-lg) {
-      gap: 3rem;
-    }
-
-    @include mobile-first($breakpoint-xl) {
-      gap: 4rem;
-    }
-  }
-
-  @include mobile-first($breakpoint-md) {
-    padding: 1.75rem;
-    border-radius: 7px;
-  }
-
-  @include mobile-first($breakpoint-lg) {
-    padding: 3rem;
-    border-radius: 12px;
-  }
-
-  @include mobile-first($breakpoint-xl) {
-    padding: 4rem;
-    border-radius: 16px;
-  }
-}
-
+// Base demo card with responsive design
 .demo-card {
   border-radius: 6px;
   box-shadow: 0 2px 4px $shadow-light;
   background: $text-white;
-
-  &--small {
-    width: 70px;
-    height: 70px;
-    font-size: 0.75rem;
-
-    @include mobile-first($breakpoint-md) {
-      width: 75px;
-      height: 75px;
-      font-size: 0.775rem;
-    }
-
-    @include mobile-first($breakpoint-lg) {
-      width: 120px;
-      height: 120px;
-      font-size: 1rem;
-    }
-
-    @include mobile-first($breakpoint-xl) {
-      width: 150px;
-      height: 150px;
-      font-size: 1.1rem;
-    }
-  }
-
-  &--medium {
-    width: 110px;
-    height: 110px;
-    font-size: 0.85rem;
-
-    @include mobile-first($breakpoint-md) {
-      width: 115px;
-      height: 115px;
-      font-size: 0.875rem;
-    }
-
-    @include mobile-first($breakpoint-lg) {
-      width: 180px;
-      height: 180px;
-      font-size: 1.1rem;
-    }
-
-    @include mobile-first($breakpoint-xl) {
-      width: 220px;
-      height: 220px;
-      font-size: 1.3rem;
-    }
-  }
-
-  &--large {
-    width: 220px;
-    height: 140px;
-    font-size: 1rem;
-
-    @include mobile-first($breakpoint-md) {
-      width: 230px;
-      height: 150px;
-      font-size: 1.05rem;
-    }
-
-    @include mobile-first($breakpoint-lg) {
-      width: 380px;
-      height: 240px;
-      font-size: 1.4rem;
-    }
-
-    @include mobile-first($breakpoint-xl) {
-      width: 450px;
-      height: 280px;
-      font-size: 1.6rem;
-    }
-  }
+  transition: all 0.3s ease;
 
   @include mobile-first($breakpoint-md) {
     border-radius: 7px;
@@ -168,6 +52,107 @@
   &--fast {
     border: 2px solid $warning-color;
   }
+
+  &--multi-flip {
+    border: 2px solid $primary-color;
+    box-shadow: 0 4px 8px $shadow-primary-light;
+  }
+
+  &--coin {
+    border-radius: 50%;
+    border: 3px solid $warning-color;
+    box-shadow: 0 4px 12px $shadow-warning;
+  }
+
+  &--extreme {
+    border: 2px solid $error-color;
+    box-shadow: 0 4px 8px $shadow-error;
+    background: linear-gradient(45deg, $background-primary, $background-secondary);
+  }
+}
+
+.demo-shape {
+  border-radius: 6px;
+  box-shadow: 0 2px 4px $shadow-light;
+  background: $text-white;
+
+  &--circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: $gradient-pink;
+
+    @include mobile-first($breakpoint-md) {
+      width: 140px;
+      height: 140px;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      width: 160px;
+      height: 160px;
+    }
+  }
+
+  &--rectangle {
+    width: 200px;
+    height: 120px;
+    border-radius: 8px;
+    background: $gradient-blue;
+
+    @include mobile-first($breakpoint-md) {
+      width: 240px;
+      height: 140px;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      width: 280px;
+      height: 160px;
+    }
+  }
+
+  &--square {
+    width: 120px;
+    height: 120px;
+    border-radius: 6px;
+    background: $gradient-primary;
+
+    @include mobile-first($breakpoint-md) {
+      width: 140px;
+      height: 140px;
+    }
+
+    @include mobile-first($breakpoint-lg) {
+      width: 160px;
+      height: 160px;
+    }
+  }
+}
+
+.shape-front,
+.shape-back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: inherit;
+  color: $text-white;
+  text-align: center;
+}
+
+.shape-back {
+  background: $gradient-pastel;
+  color: $text-primary;
+}
+
+.coin-front {
+  background: $gradient-warning;
+  color: $text-primary;
+}
+
+.coin-back {
+  background: $gradient-success;
+  color: $text-white;
 }
 
 .card-front,
@@ -395,9 +380,5 @@
     &__header h1 {
       font-size: 1.75rem;
     }
-  }
-
-  .demo-container {
-    padding: 1rem;
   }
 }

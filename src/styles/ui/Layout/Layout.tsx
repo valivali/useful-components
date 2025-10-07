@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-import { TextDefault, TitleLg, TitleMd, TitleSm } from "@/styles/ui"
+import { TextDefault, TitleLg, TitleSm } from "@/styles/ui"
 
 import { Button } from "../Button"
 
@@ -201,23 +201,6 @@ const Page: React.FC<PageProps> = ({
       <main className="ui-page__content">{children}</main>
       {showFooter && <PageFooter {...footerProps} />}
     </Container>
-  )
-}
-
-export const DemoContainer: React.FC<{
-  children: React.ReactNode
-  className?: string
-  title?: string
-  description?: string
-}> = ({ children, className = "", title, description }) => {
-  const classes = ["ui-demo-container", "ui-demo-container--card", className].filter(Boolean).join(" ")
-
-  return (
-    <div className={classes}>
-      {title && <TitleMd>{title}</TitleMd>}
-      {description && <TextDefault>{description}</TextDefault>}
-      <div className="demo-container">{children}</div>
-    </div>
   )
 }
 

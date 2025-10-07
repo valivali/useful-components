@@ -14,66 +14,6 @@
   }
 }
 
-.demo-section {
-  background: $overlay-medium;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 20px $shadow-light;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-
-  @include mobile-first($breakpoint-md) {
-    padding: 2rem;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px $shadow-medium;
-  }
-}
-
-.demo-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 200px;
-  padding: 1rem;
-  background: $overlay-medium;
-  border-radius: 8px;
-  border: 2px dashed $border-light;
-
-  @include mobile-first($breakpoint-md) {
-    padding: 2rem;
-    min-height: 250px;
-  }
-
-  &--sidebar {
-    min-height: 300px;
-    align-items: stretch;
-    justify-content: flex-start;
-  }
-
-  &--animations {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    align-items: start;
-
-    @include mobile-first($breakpoint-md) {
-      gap: 2rem;
-    }
-  }
-
-  &--mobile-menu {
-    position: relative;
-    min-height: 300px;
-    background: linear-gradient(135deg, $overlay-light 0%, $overlay-light 100%);
-    border: 2px solid $border-light;
-    overflow: hidden;
-  }
-}
-
 .controlled-demo {
   display: flex;
   flex-direction: column;
@@ -356,12 +296,6 @@
 }
 
 @include mobile-only {
-  .demo-container {
-    &--animations {
-      grid-template-columns: 1fr;
-    }
-  }
-
   .mobile-menu-content nav a {
     font-size: 1.25rem;
     padding: 0.75rem 1.5rem;
@@ -369,17 +303,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .demo-section,
   .controlled-demo .control-button {
     transition: none;
   }
 }
 
 @media (prefers-contrast: more) {
-  .demo-container {
-    border-color: $text-primary;
-  }
-
   .props-table .prop-row {
     border: 1px solid $text-primary;
   }

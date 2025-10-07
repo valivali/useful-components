@@ -1,12 +1,12 @@
 @use "../../mixins" as *;
 
 .ui-card {
-  background: $text-white;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 4px $shadow-light;
-  border: 1px solid $border-light;
-  transition: all 0.3s ease;
+  background: var(--text-on-dark);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: 0 2px 4px var(--shadow-subtle);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-slow);
   position: relative;
   width: 100%;
   max-width: 100%;
@@ -16,52 +16,52 @@
   @include mobile-first($breakpoint-md) {
     border-radius: 10px;
     padding: 1.75rem;
-    box-shadow: 0 3px 5px $shadow-light;
+    box-shadow: 0 3px 5px var(--shadow-subtle);
   }
 
   @include mobile-first($breakpoint-lg) {
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 6px $shadow-light;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    box-shadow: 0 4px 6px var(--shadow-subtle);
   }
 
   &:hover {
-    box-shadow: 0 4px 15px $shadow-medium;
-    border-color: $primary-color;
+    box-shadow: 0 4px 15px var(--shadow-default);
+    border-color: var(--brand-blue);
 
     @include mobile-first($breakpoint-md) {
-      box-shadow: 0 6px 20px $shadow-medium;
+      box-shadow: 0 6px 20px var(--shadow-default);
     }
 
     @include mobile-first($breakpoint-lg) {
-      box-shadow: 0 8px 25px $shadow-dark;
+      box-shadow: 0 8px 25px var(--shadow-strong);
     }
   }
 
   &--elevated {
-    box-shadow: 0 4px 8px $shadow-medium;
+    box-shadow: 0 4px 8px var(--shadow-default);
 
     &:hover {
-      box-shadow: 0 8px 20px $shadow-dark;
+      box-shadow: 0 8px 20px var(--shadow-strong);
       transform: translateY(-2px);
     }
   }
 
   &--outlined {
-    border: 2px solid $border-light;
+    border: 2px solid var(--border-subtle);
     box-shadow: none;
 
     &:hover {
-      border-color: $primary-color;
-      box-shadow: 0 2px 8px $shadow-primary-light;
+      border-color: var(--brand-blue);
+      box-shadow: 0 2px 8px var(--color-shadow-primary-light);
     }
   }
 
   &--interactive {
     cursor: pointer;
     transition:
-      transform 0.2s ease,
-      box-shadow 0.3s ease;
+      transform var(--transition-normal),
+      box-shadow var(--transition-slow);
 
     &:hover {
       transform: translateY(-4px);
@@ -73,31 +73,31 @@
   }
 
   &--glass {
-    background: $overlay-medium;
+    background: var(--color-bg-secondary);
     backdrop-filter: blur(10px);
-    border: 1px solid $border-white-medium;
-    color: $text-white;
+    border: 1px solid var(--border-subtle);
+    color: var(--color-text-white);
 
     &:hover {
-      background: $overlay-dark;
+      background: var(--color-bg-tertiary);
       border-color: rgba(255, 255, 255, 0.4);
     }
   }
 
   &--dark {
-    background: $background-navy;
-    color: $text-white;
-    border-color: $background-navy-light;
+    background: var(--color-bg-dark);
+    color: var(--color-text-white);
+    border-color: var(--color-bg-darker);
 
     &:hover {
-      background: $background-navy-light;
-      border-color: $primary-color;
+      background: var(--color-bg-darker);
+      border-color: var(--brand-blue);
     }
   }
 
   &--small {
-    padding: 1rem;
-    border-radius: 6px;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
 
     @include mobile-first($breakpoint-md) {
       padding: 1.25rem;
@@ -105,23 +105,23 @@
     }
 
     @include mobile-first($breakpoint-lg) {
-      padding: 1.5rem;
-      border-radius: 8px;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
     }
   }
 
   &--large {
-    padding: 2rem;
+    padding: var(--spacing-xl);
     border-radius: 10px;
 
     @include mobile-first($breakpoint-md) {
       padding: 2.5rem;
-      border-radius: 12px;
+      border-radius: var(--radius-xl);
     }
 
     @include mobile-first($breakpoint-lg) {
-      padding: 3rem;
-      border-radius: 16px;
+      padding: var(--spacing-2xl);
+      border-radius: var(--radius-2xl);
     }
   }
 
@@ -131,15 +131,15 @@
 
     &:hover {
       transform: none;
-      box-shadow: 0 4px 6px $shadow-light;
-      border-color: $border-light;
+      box-shadow: 0 4px 6px var(--shadow-subtle);
+      border-color: var(--border-subtle);
     }
   }
 
   &__header {
-    margin-bottom: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid $border-light;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-subtle);
 
     &:last-child {
       margin-bottom: 0;
@@ -155,9 +155,9 @@
   }
 
   &__footer {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid $border-light;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-subtle);
 
     &:first-child {
       margin-top: 0;
@@ -175,7 +175,7 @@
     height: 3rem;
     background: $gradient-pink;
     border-radius: 50%;
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-md);
     @include mobile-first($breakpoint-md) {
       font-size: 2.5rem;
       width: 3.5rem;
@@ -187,7 +187,7 @@
       font-size: 3rem;
       width: 4rem;
       height: 4rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--spacing-lg);
     }
 
     &--gradient-1 {
@@ -211,8 +211,8 @@
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0 0 0.75rem 0;
-    color: $text-primary;
-    line-height: 1.3;
+    color: var(--text-heading);
+    line-height: var(--line-height-tight);
 
     @include mobile-first($breakpoint-md) {
       font-size: 1.4rem;
@@ -233,9 +233,9 @@
   }
 
   &__description {
-    color: $text-secondary;
-    line-height: 1.5;
-    margin: 0 0 1rem 0;
+    color: var(--text-body);
+    line-height: var(--line-height-normal);
+    margin: 0 0 var(--spacing-md) 0;
     flex: 1;
     font-size: 0.9rem;
     @include mobile-first($breakpoint-md) {
@@ -245,7 +245,7 @@
     }
 
     @include mobile-first($breakpoint-lg) {
-      margin: 0 0 1.5rem 0;
+      margin: 0 0 var(--spacing-lg) 0;
     }
 
     .ui-card--dark & {
@@ -263,18 +263,18 @@
     gap: 0.375rem;
     margin-bottom: 0.75rem;
     @include mobile-first($breakpoint-md) {
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
     }
   }
 
   &__tag {
-    background: $background-tertiary;
+    background: var(--color-bg-tertiary);
     color: #555;
     padding: 0.2rem 0.6rem;
     border-radius: 10px;
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
 
     @include mobile-first($breakpoint-md) {
       padding: 0.25rem 0.75rem;
@@ -283,22 +283,22 @@
     }
 
     &--primary {
-      background: $primary-color;
+      background: var(--brand-blue);
       color: white;
     }
 
     &--success {
-      background: $success-color;
+      background: var(--color-success);
       color: white;
     }
 
     &--warning {
-      background: $warning-color;
+      background: var(--color-warning);
       color: white;
     }
 
     &--danger {
-      background: $error-color;
+      background: var(--color-error);
       color: white;
     }
 
@@ -318,8 +318,8 @@
     top: 1rem;
     right: 1rem;
     font-size: 1.25rem;
-    color: $primary-color;
-    transition: transform 0.2s ease;
+    color: var(--brand-blue);
+    transition: transform var(--transition-normal);
 
     @include mobile-first($breakpoint-md) {
       top: 1.25rem;
@@ -362,14 +362,14 @@
   text-decoration: none;
   color: inherit;
   display: block;
-  transition: transform 0.2s ease;
+  transition: transform var(--transition-normal);
 
   &:hover {
     transform: translateY(-4px);
   }
 
   &:focus {
-    outline: 2px solid $primary-color;
+    outline: 2px solid var(--brand-blue);
     outline-offset: 2px;
     border-radius: inherit;
   }
@@ -378,7 +378,7 @@
 @include mobile-only {
   .ui-card {
     padding: 1.25rem;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
 
     &__icon {
       width: 2.5rem;

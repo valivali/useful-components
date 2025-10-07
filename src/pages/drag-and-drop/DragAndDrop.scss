@@ -19,52 +19,6 @@
     }
   }
 
-  .demo-section {
-    margin-bottom: 2.5rem;
-    background: $overlay-medium;
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid $border-white-medium;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-x: hidden;
-
-    @include mobile-first($breakpoint-md) {
-      margin-bottom: 3rem;
-      border-radius: 14px;
-      padding: 1.75rem;
-    }
-
-    @include mobile-first($breakpoint-lg) {
-      margin-bottom: 4rem;
-      border-radius: 16px;
-      padding: 2rem;
-    }
-
-    .demo-container {
-      background: $overlay-black-medium;
-      border-radius: 8px;
-      padding: 1.5rem;
-      border: 1px solid $border-white;
-      width: 100%;
-      max-width: 100%;
-      box-sizing: border-box;
-      overflow-x: hidden;
-
-      @include mobile-first($breakpoint-md) {
-        border-radius: 10px;
-        padding: 1.75rem;
-      }
-
-      @include mobile-first($breakpoint-lg) {
-        border-radius: 12px;
-        padding: 2rem;
-      }
-    }
-  }
-
   .props-table {
     display: grid;
     gap: 0.5rem;
@@ -531,28 +485,12 @@
     &__content {
       padding: 0.75rem;
     }
-
-    .demo-section {
-      padding: 1.25rem;
-      margin-bottom: 2rem;
-      border-radius: 10px;
-
-      .demo-container {
-        padding: 1.25rem;
-        border-radius: 6px;
-      }
-    }
   }
 }
 
 // Dark theme adjustments
 @media (prefers-color-scheme: dark) {
   .drag-and-drop-page {
-    .demo-section {
-      background: $overlay-black-medium;
-      border-color: $border-white;
-    }
-
     .props-table {
       background: $overlay-black-medium;
       border-color: $overlay-medium;

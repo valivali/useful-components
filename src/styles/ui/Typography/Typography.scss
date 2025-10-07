@@ -2,18 +2,18 @@
 
 %typography-base {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
-  line-height: 1.5;
+  line-height: var(--line-height-normal);
   margin: 0;
-  color: #333;
+  color: var(--text-heading);
 }
 
 .ui-title-lg {
   @extend %typography-base;
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
   letter-spacing: -0.025em;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 2.25rem;
@@ -30,11 +30,11 @@
 
 .ui-subtitle-lg {
   @extend %typography-base;
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
   line-height: 1.3;
   letter-spacing: -0.0125em;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 1.5rem;
@@ -51,11 +51,11 @@
 
 .ui-title-md {
   @extend %typography-base;
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
   letter-spacing: -0.025em;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 1.75rem;
@@ -72,11 +72,11 @@
 
 .ui-subtitle-md {
   @extend %typography-base;
-  font-size: 1.125rem;
-  font-weight: 500;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
   line-height: 1.3;
   letter-spacing: -0.0125em;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 1.25rem;
@@ -93,11 +93,11 @@
 
 .ui-title-sm {
   @extend %typography-base;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   line-height: 1.4;
   letter-spacing: 0.05em;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 1rem;
@@ -106,11 +106,11 @@
 
 .ui-text-default {
   @extend %typography-base;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
   letter-spacing: normal;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 1rem;
@@ -119,11 +119,11 @@
 
 .ui-text-default-bold {
   @extend %typography-base;
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1.5;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
   letter-spacing: normal;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 1rem;
@@ -132,11 +132,11 @@
 
 .ui-text-lg {
   @extend %typography-base;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
   letter-spacing: normal;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 1.125rem;
@@ -145,11 +145,11 @@
 
 .ui-text-lg-bold {
   @extend %typography-base;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.5;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
   letter-spacing: normal;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 1.125rem;
@@ -158,11 +158,11 @@
 
 .ui-text-sm {
   @extend %typography-base;
-  font-size: 0.75rem;
-  font-weight: 400;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
   line-height: 1.4;
   letter-spacing: 0.025em;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 0.875rem;
@@ -171,11 +171,11 @@
 
 .ui-text-sm-bold {
   @extend %typography-base;
-  font-size: 0.75rem;
-  font-weight: 500;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
   line-height: 1.4;
   letter-spacing: 0.025em;
-  color: #333;
+  color: var(--text-heading);
 
   @include mobile-first($breakpoint-sm) {
     font-size: 0.875rem;

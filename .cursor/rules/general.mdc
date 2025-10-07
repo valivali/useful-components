@@ -1,16 +1,5 @@
 ---
-
-## ✅ Quick Checklist
-
-- [ ] Follow **SOLID principles**
-- [ ] Follow **Clean Code paradigms**
-- [ ] Prefer **composition over inheritance**
-- [ ] Use **strict typing** with `I*` interfaces for components
-- [ ] Write **tests for functionality, not UI**
-- [ ] Optimize for **performance** after logic implementation
-- [ ] Avoid **DOM manipulations** and **inline styles**
-- [ ] Keep **comments minimal**
-
+alwaysApply: true
 ---
 
 ## 1. **SOLID Principles**

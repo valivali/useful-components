@@ -214,7 +214,7 @@ const DragAndDropPage: React.FC = () => {
       className="drag-and-drop-page"
       title="DragAndDropElement Component"
       subtitle="A powerful component for implementing HTML5 drag and drop functionality with visual feedback."
-      backLink={{ to: "/", text: "← Back to Components", children: null }}>
+      backLink={{ to: "/", text: "Back to Components", children: null }}>
       <div className="demo-section">
         <TitleMd>Basic Drag and Drop</TitleMd>
         <TextDefault>Drag tasks between different status columns. Notice the visual feedback when hovering over drop zones.</TextDefault>
