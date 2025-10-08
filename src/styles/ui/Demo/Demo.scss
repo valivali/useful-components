@@ -130,11 +130,6 @@
     border-radius: 16px;
     padding: 2rem;
   }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px $shadow-medium;
-  }
 }
 
 // Demo container - the actual content area within demo sections

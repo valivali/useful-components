@@ -6,13 +6,11 @@ import { match } from "ts-pattern"
 import DragAndDropElement, { type DragItem, type DropZone } from "@/components/DragAndDropElement"
 import { DemoContainer, FeaturesList, Page, PropsTable, TextDefault, TitleMd, TitleSm } from "@/styles/ui"
 
-// Task status types for the Kanban board
 interface Task extends DragItem {
   status: "todo" | "progress" | "done"
   title: string
 }
 
-// Static data moved outside component to prevent recreation on every render
 const INITIAL_TASKS: Task[] = [
   { id: "task-1", content: "🎯 Design Homepage", status: "todo", title: "Design Homepage" },
   { id: "task-2", content: "📝 Write Documentation", status: "todo", title: "Write Documentation" },
@@ -82,32 +80,26 @@ const CUSTOM_DROP_ZONES: DropZone[] = [
   { id: "tier-3", label: "⭐⭐⭐ Tier 3" }
 ]
 
-// Kanban Board Component that demonstrates items moving between zones
 const KanbanBoard: React.FC = React.memo(() => {
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS)
 
-  // This is the key logic - inspired by your example
   const handleTaskDrop = useCallback((taskId: string, targetColumnId: string) => {
     setTasks(prevTasks => {
       const taskToMove = prevTasks.find(task => task.id === taskId)
       if (!taskToMove) return prevTasks
 
-      // Don't move if already in target column
       if (taskToMove.status === targetColumnId) return prevTasks
 
-      // Update the task status based on target column using ts-pattern
       const newStatus = match(targetColumnId)
         .with("todo", () => "todo" as const)
         .with("progress", () => "progress" as const)
         .with("done", () => "done" as const)
         .otherwise(() => taskToMove.status)
 
-      // Return updated tasks array
       return prevTasks.map(task => (task.id === taskId ? { ...task, status: newStatus } : task))
     })
   }, [])
 
-  // Memoized helper to get tasks for a specific column
   const getTasksForColumn = useCallback(
     (status: string) => {
       return tasks.filter(task => task.status === status)
@@ -115,7 +107,6 @@ const KanbanBoard: React.FC = React.memo(() => {
     [tasks]
   )
 
-  // Memoized columns data for each column to prevent unnecessary re-renders
   const columnsData = useMemo(() => {
     return KANBAN_COLUMNS.map(column => ({
       ...column,
@@ -133,7 +124,7 @@ const KanbanBoard: React.FC = React.memo(() => {
           <div className="kanban-column-content">
             <DragAndDropElement
               items={columnData.tasks}
-              dropZones={KANBAN_COLUMNS} // Show ALL columns as drop zones
+              dropZones={KANBAN_COLUMNS}
               onDrop={handleTaskDrop}
               className="kanban-drag-drop"
               itemClassName="kanban-task"
@@ -147,11 +138,9 @@ const KanbanBoard: React.FC = React.memo(() => {
 })
 
 const DragAndDropPage: React.FC = () => {
-  // State for shopping demo
   const [cart, setCart] = useState<string[]>([])
   const [wishlist, setWishlist] = useState<string[]>([])
 
-  // Memoized callback functions to prevent unnecessary re-renders
   const handleBasicDrop = useCallback((itemId: string, dropZoneId: string) => {
     console.log(`Dropped ${itemId} into ${dropZoneId}`)
   }, [])
@@ -192,14 +181,12 @@ const DragAndDropPage: React.FC = () => {
     [cart, wishlist]
   )
 
-  // Memoized shopping items to prevent unnecessary filtering
   const cartItems = useMemo(() => PRODUCTS.filter(p => cart.includes(p.id)), [cart])
 
   const wishlistItems = useMemo(() => PRODUCTS.filter(p => wishlist.includes(p.id)), [wishlist])
 
   const availableProducts = useMemo(() => PRODUCTS.filter(p => !cart.includes(p.id) && !wishlist.includes(p.id)), [cart, wishlist])
 
-  // Memoized global drop zone handler
   const handleGlobalDrop = useCallback(
     (e: React.DragEvent, zoneId: string) => {
       e.preventDefault()
@@ -212,7 +199,7 @@ const DragAndDropPage: React.FC = () => {
   return (
     <Page
       className="drag-and-drop-page"
-      title="DragAndDropElement Component"
+      title="DragAndDrop Component"
       subtitle="A powerful component for implementing HTML5 drag and drop functionality with visual feedback."
       backLink={{ to: "/", text: "Back to Components", children: null }}>
       <div className="demo-section">
@@ -258,7 +245,7 @@ const DragAndDropPage: React.FC = () => {
               <TitleSm>🏪 Available Products</TitleSm>
               <DragAndDropElement
                 items={availableProducts}
-                dropZones={[SHOPPING_DROP_ZONES[2]]} // Only products zone
+                dropZones={[SHOPPING_DROP_ZONES[2]]}
                 onDrop={handleShoppingDrop}
                 className="shopping-products"
               />
@@ -268,7 +255,7 @@ const DragAndDropPage: React.FC = () => {
               <TitleSm>🛒 Shopping Cart ({cart.length} items)</TitleSm>
               <DragAndDropElement
                 items={cartItems}
-                dropZones={[SHOPPING_DROP_ZONES[0]]} // Only cart zone
+                dropZones={[SHOPPING_DROP_ZONES[0]]}
                 onDrop={handleShoppingDrop}
                 className="shopping-cart"
               />
@@ -278,13 +265,12 @@ const DragAndDropPage: React.FC = () => {
               <TitleSm>💝 Wishlist ({wishlist.length} items)</TitleSm>
               <DragAndDropElement
                 items={wishlistItems}
-                dropZones={[SHOPPING_DROP_ZONES[1]]} // Only wishlist zone
+                dropZones={[SHOPPING_DROP_ZONES[1]]}
                 onDrop={handleShoppingDrop}
                 className="shopping-wishlist"
               />
             </div>
 
-            {/* Global drop zones for cross-area dragging */}
             <div className="global-drop-zones">
               <div className="drop-zone-row">
                 {SHOPPING_DROP_ZONES.map(zone => (

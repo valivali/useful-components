@@ -7,3 +7,5 @@ export * from "./Typography"
 export * from "./Layout"
 
 export * from "./Demo"
+
+export * from "./Toast"

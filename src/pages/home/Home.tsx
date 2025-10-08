@@ -24,7 +24,7 @@ const components: ComponentInfo[] = [
   },
   {
     id: "drag-and-drop",
-    name: "DragAndDropElement",
+    name: "DragAndDrop",
     description: "A powerful HTML5 drag and drop component with visual feedback, type restrictions, and custom styling.",
     path: "/drag-and-drop",
     icon: "🎯",
@@ -37,6 +37,14 @@ const components: ComponentInfo[] = [
     path: "/expandable",
     icon: "📋",
     tags: ["Animation", "Interactive", "Layout", "Accordion"]
+  },
+  {
+    id: "toast",
+    name: "Toast",
+    description: "A flexible notification system with context-based state management, multiple types, and smooth animations.",
+    path: "/toast",
+    icon: "🔔",
+    tags: ["Notification", "Context", "Animation", "Feedback"]
   }
 ]
 

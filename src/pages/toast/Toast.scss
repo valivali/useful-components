@@ -1,0 +1,36 @@
+@use "../../styles/mixins" as *;
+
+.toast-page {
+  .toast-demo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+    align-items: start;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__footer {
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--border-subtle);
+
+    > * + * {
+      margin-top: var(--spacing-lg);
+    }
+  }
+}
+
+// Demo-specific styles
+.controlled-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  align-items: center;
+
+  .control-button {
+    min-width: 150px;
+  }
+}
